@@ -1,0 +1,32 @@
+\begin{proof}[Solution]
+    Let $S^2 = \sum_{i=1}^n x_i^2$ and we derive the posterior distribution 
+    $$
+    \xi(\eta|\boldsymbol{x}) \propto \log(1/\eta)^n \eta^{t^{-2}S^2}\cdot\frac{1}{\eta\log(1/\eta)} = \log(1/\eta)^{n-1} \eta^{t^{-2}S^2 - 1}.
+    $$
+    Denote $k = t^{-2}S^2$ and
+    $$
+    R(n) = \int_0^1 \log(1/\eta)^{n-1} \eta^{k - 1} d\eta.
+    $$
+    The marginal distribution of $\boldsymbol{x}$ is 
+    $$
+    m(\boldsymbol{x}) = R(n) = \log(1/\eta)^{n-1}\frac{\eta^k}{k}\bigg|_0^1 + \int_0^1 (n-1)\frac{\eta^k}{k}\frac{\log(1/\eta)^{n-2}}{\eta} d\eta = \frac{n-1}{k}R(n-1)
+    $$
+    with $R(1) = \dfrac{1}{k}$. With this recurrence equation, we obtain 
+    $$
+    m(\boldsymbol{x}) = R(n) = \frac{(n-1)!}{k^{n-1}}R(1) = k^{-n}(n-1)!.
+    $$
+    We conclude that 
+    $$
+    \xi(\eta|\boldsymbol{x}) = \frac{(t^{-2}S^2)^n}{(n-1)!}\log(1/\eta)^{n-1}\eta^{t^{-2}S^2 - 1}.
+    $$
+
+    Now we are ready to calculate the predictive distribution 
+    \begin{equation*}
+        \begin{split}
+            p(\bar{x}|\boldsymbol{x}) & = \int_0^1 \frac{2}{t^2}\bar{x}\log(1/\eta)\eta^{\bar{x}^2/t^2}\frac{(t^{-2}S^2)^n}{(n-1)!}\log(1/\eta)^{n-1}\eta^{t^{-2}S^2 - 1} d\eta \\
+            &= \frac{2(t^{-2}S^2)^n}{t^2(n-1)!} \bar{x} \int_0^1 \log(1/\eta)^n\eta^{t^{-2}(S^2+\bar{x}^2) - 1} d\eta \\
+            &= \frac{2(t^{-2}S^2)^n}{t^2(n-1)!} \bar{x}(t^{-2}(S^2 + \bar{x}^2))^{-n-1}n!,  \text{ [by our calculation of }R(n)]\\
+            &= 2n\frac{S^{2n}}{(S^2 + \bar{x}^2)^{n+1}}\bar{x}
+        \end{split}
+    \end{equation*}
+\end{proof}

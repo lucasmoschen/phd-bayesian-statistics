@@ -1,0 +1,16 @@
+\begin{proof}[Solution]
+    First, we reparametrize the density function to the parameter $\eta$:
+    $$
+    \eta = \exp\left(-\frac{t^2}{2\sigma^2}\right) \implies \log(1/\eta) = \frac{t^2}{2\sigma^2} \implies \sigma^2 = \frac{t^2}{2\log(1/\eta)}
+    $$
+    and 
+    $$
+    \exp\left(-\frac{x^2}{2\sigma^2}\right) = \exp\left(-\frac{t^2}{2\sigma^2}\frac{x^2}{t^2}\right) = \eta^{x^2/t^2}.
+    $$
+    Then, the reparametrized density is 
+    $$f(x|\eta) = \frac{2}{t^2}\log(1/\eta)x\eta^{x^2/t^2}$$
+    and the likelihood function is 
+    $$
+    L(\eta|\boldsymbol{x}) = \prod_{i=1}^n \frac{2}{t^2}\log(1/\eta)x_i\eta^{x_i^2/t^2} = \frac{2^n}{t^{2n}}\log(1/\eta)^n\left(\prod_{i=1}^n x_i\right) \, \eta^{t^{-2}\sum_{i=1}^n x_i^2}
+    $$
+\end{proof}

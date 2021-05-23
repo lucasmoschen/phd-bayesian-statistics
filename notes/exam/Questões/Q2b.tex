@@ -1,0 +1,36 @@
+\begin{proof}
+    An estimator $\delta$ of $\theta$ is unbiased if $\ev_{\theta}[\delta(x)] =
+    \theta$, for all $\theta \in \Theta$ (\cite{schervish1996theory}).
+    Following the hint, consider the integrated risk 
+    $$
+    r(\pi, \delta_S) = \int_{\Theta}\int_{\mathcal{X}} L(\theta, \delta_S(x)) f(x|\theta) \,dx \pi(\theta) \, d\theta 
+    $$
+    Applying to the quadratic loss,
+    \begin{equation*}
+        \begin{split}
+            r(\pi, \delta_S) &= \int_{\Theta}\int_{\mathcal{X}} (\delta_S(x) - \theta)^2 f(x|\theta)\pi(\theta) \, dx \, d\theta \\
+            &= \int_{\Theta}\int_{\mathcal{X}} \left(\delta_S(x)^2 - 2\delta_S(x)\theta + \theta^2\right) f(x|\theta)\pi(\theta) \, dx \, d\theta \\ 
+            &= \int_{\mathcal{X}} \delta_S(x)^2 m(x) \, dx + \int_{\Theta} \theta^2 \pi(\theta) \, d\theta \\
+            &~~~~- \int_{\Theta} \theta \pi(\theta) \int_{\mathcal{X}} \delta_S(x) f(x|\theta)\, dx \, d\theta - \int_{\mathcal{X}} \delta_S(x) \int_{\Theta} \theta f(x|\theta)\pi(\theta) \, d\theta \, dx. 
+        \end{split}
+    \end{equation*}
+
+    Observe that 
+    $$\int_{\mathcal{X}} \delta_S(x) f(x|\theta)dx =
+    E_{\theta}[\delta_S(x)].$$ Suppose $\delta_S(x)$ is unbiased. Then
+    $E_{\theta}[\delta_S(x)] = \theta$ and 
+    $$
+    \int_{\mathcal{X}} \delta_S(x) f(x|\theta)dx = \theta
+    $$
+    by definition. The fourth integral is 
+    $$\int_{\Theta} \theta f(x|\theta)\pi(\theta)d\theta = \int_{\Theta} \theta
+    \xi(\theta|x)m(x) = E_{\xi}[\theta]m(x) = \delta_S(x)m(x).$$
+
+    We conclude that $r(\pi, \delta_S) = 0$. Because the integrand is
+    non-negative, we conclude that 
+    $$
+    (\theta - \delta_S(x))^2f(x|\theta)\pi(\theta) = 0
+    $$
+    almost surely over $\Theta \times \mathcal{X}$, what is an absurd. 
+
+\end{proof}

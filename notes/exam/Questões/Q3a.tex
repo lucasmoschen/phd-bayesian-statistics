@@ -1,0 +1,11 @@
+\begin{proof}[Solution]
+    Define $y = x^2$ and $x \, dx = dy/2$
+    \begin{equation*}
+        \begin{split}
+            \eta = \pr(X > t) &= \int_{t}^{\infty} \frac{x}{\sigma^2}\exp\left(-\frac{x^2}{2\sigma^2}\right)\, dx \\
+            &= \int_{t^2}^{\infty} \frac{1}{2\sigma^2}\exp\left(-\frac{y}{2\sigma^2}\right) \, dy \\
+            &= -\exp\left(-\frac{y}{2\sigma^2}\right)_{t^2}^{\infty} \\
+            &= \exp\left(-\frac{t^2}{2\sigma^2}\right)
+        \end{split}
+    \end{equation*}
+\end{proof}

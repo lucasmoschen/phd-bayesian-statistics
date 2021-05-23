@@ -1,0 +1,29 @@
+\begin{proof}
+    We want to prove that $\xi(\theta|x)$ is well defined almost
+    surely, and after 
+    $$
+    \int_{\Theta } \xi(\theta|x) d\mu(t) = \int_{\Theta} \xi(\theta|x)dt < + \infty
+    $$
+    First, let's prove that 
+    $$m(x) = \int_{\Theta} f(x|\theta)\pi(\theta) \, d\theta \neq 0 \text{ or } m(x) < + \infty$$ almost surely,
+    that is, $\xi(\theta|x)$ is well defined. 
+    
+    Let $A = \{x \in \mathcal{X}: m(x) = 0\}$ and $B = \{x \in \mathcal{X}:
+    m(x) = +\infty\}$. Then, because the dominating measure is the Lebesgue measure. 
+    $$
+    \pr(X \in A) = \int_A m(x) dx = 0
+    $$
+    and 
+    $$
+    \pr(X \in B) = \int_B m(x) dx = \int_B + \infty dx 
+    $$
+    If $\int_B dx > 0$, we have $\pr(X \in B) = + \infty$, what is an absurd.
+    So $\int_B dx = 0$ and $\pr(X \in B) = 0$. We conclude that $\xi(\theta|x)$ is well
+    defined almost surely. 
+
+    Given the definition of $m(x)$, we know that
+    $$
+    \int_{\Theta} \xi(\theta|x)dt = 1,
+    $$
+    what proves our statement 
+\end{proof}

@@ -1,0 +1,51 @@
+\begin{proof}[Solution]
+    The maximum likelihood estimator is the argument of 
+    $$\max_p p^x(1-p)^{n-x} = \max_p x\log p + (n-x)\log (1-p).$$
+
+    We proved in the last item that there is a maximum and it's attained
+    at 
+    $$
+    \delta_{MLE}(x) = \frac{x}{n}.
+    $$
+
+    Denote $\delta_2$ for the Bayes estimator associated to the quadratic
+    loss and $\delta_1$ to the 0-1 loss. We note that $\delta_1 =
+    \delta_{MLE}$, because the prior distribution is uniform. 
+    
+    \begin{enumerate}
+        \item[(i)] Here we calculate the posterior expected risk associated
+        with $\delta_1$ and $\delta_2$.  
+
+        $$\varrho(\pi, \delta_1|x) = \lim_{\epsilon \to
+        0}\ev^{\xi}[L_{\epsilon}(p, \delta_1)] = 1,$$
+        because $0 \le \int_{\delta_1-\epsilon}^{\delta_1+\epsilon}
+        \xi(p|x)dp \le 2\epsilon\cdot\xi(\delta_1|x) \overset{\epsilon\to
+        0}{\to} 0$.
+
+        $$
+        \varrho(\pi, \delta_2|x) = \ev^{\xi}[(p - \delta_1)^2] = \ev^{\xi}[p^2] - 2\delta_1\ev^{\xi}[p] + \delta_1^2 = \ev^{\xi}[p^2] -\ev^{\xi}[p]^2 = \var^{\xi}[p].
+        $$
+        We know that $p|x \sim Beta(x+1, n-x+1)$. Then, by \cite{beta-dist},
+        $$\var^{\xi}[p] = \frac{(x+1)(n-x+1)}{(n+2)^2(n+3)} \le
+        \frac{1}{4}\frac{(n+2)^2}{(n+2)^2(n+3)} = \frac{1}{4(n+3)}.$$
+
+        \item[(ii)] We calculate the integrated risk 
+        
+        $$
+        r(\pi, \delta_1) = \sum_{x=0}^n \varrho(\pi, \delta_1|x)= \sum_{x=0}^n 1 = n + 1
+        $$
+        and
+        $$
+        r(\pi, \delta_2) = \sum_{x=0}^n \varrho(\pi, \delta_2|x)= \sum_{x=0}^n \frac{(x+1)(n-x+1)}{(n+2)^2(n+3)} \le \frac{n+1}{4(n+3)} < \frac{1}{4}.
+        $$
+    \end{enumerate}
+    We finish saying that, in terms of (i) and (ii), $\delta_2$ has less risk, then,
+    it would be preferable. However, we shall remember that the 0-1 loss weights to
+    much if you are far from $p$. When $\epsilon \to 0$, we are saying all
+    points with distance greater then $\epsilon$ to $x/n$ should have error 1,
+    therefore, it was expected $\delta_2$ to have less risk. 
+
+    The last remark is that MLE is equal to MAP in this case, so the risks
+    are equal. If you are worried with invariance, bias and frequentist
+    properties, MAP is the preferred option, then. 
+\end{proof}

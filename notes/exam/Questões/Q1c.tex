@@ -1,0 +1,83 @@
+\begin{proposition}
+    \label{prop:quadratic-loss}
+    The Bayes estimator $\delta^{\pi}$ associated with the quadratic loss is
+    the posterior expectation
+    $$
+    \delta^{\pi}(x) = \ev^{\xi}[p]
+    $$
+\end{proposition}
+
+\begin{proof}
+    The quadratic loss is $L(p, \delta) = (p - \delta)^2$. Then, 
+    $$
+    \varrho(\pi, \delta|x) = \ev^{\xi}[(p - \delta)^2] = \ev^{\xi}[p^2] - 2\delta \ev^{\xi}[p] + \delta^2
+    $$
+    and $\delta^{\pi}(x) = \min_{d} \varrho(\pi, d|x)$. Since  the quadratic
+    function is convex and 
+    $$
+    \frac{d}{d\delta} \varrho(\pi, \ev^{\xi}[p]) = 2\ev^{\xi}[p] - 2\ev^{\xi}[p] = 0,
+    $$
+    we conclude $\delta^{\pi}(x) = \ev^{\xi}[p]$
+\end{proof}
+
+\begin{proof}[Solution]
+    We divide the solution in quadratic and 0-1 loss. 
+    \begin{enumerate}
+        \item[(i)] Consider the quadratic loss. As proved in Proposition \ref{prop:quadratic-loss}, the Bayes estimator $\delta^{\pi}$ is the
+        posterior mean. By equation \ref{eq:posterior-1b}, we know that the
+        distribution of $p$ given $X = x$ is Beta with parameters $x+1$ and
+        $n-x+1$. Then, the posterior mean is 
+        $$
+        \delta^{\pi}(x) = \int_0^1 p \cdot\xi(p|x) \, dp = \frac{1}{B(x+1,n-x+1)}\int_0^1 p ^{x+1}(1-p)^{n-x} dp =  \frac{B(x+2,n-x+1)}{B(x+1,n-x+1)}.
+        $$
+
+        By the definition of Beta function, 
+        $$
+        \delta^{\pi}(x) = \frac{\frac{(x+1)!(n-x)!}{(n+2)!}}{\frac{x!(n-x)!}{(n+1)!}} = \frac{(x+1)!(n-x)!(n+1)!}{x!(n-x)!(n+2)!} = \frac{x+1}{n+2}.
+        $$
+
+        \item[(ii)] First we must define a sequence of losses indexed by
+        $\epsilon$, 
+        $$
+        L_{\epsilon}(p, d) = 1 - \mathbbm{1}_{|p-d| \le \epsilon}
+        $$
+        and consider $\epsilon \to 0$. So 
+        $$
+        \ev^{\xi}[L_{\epsilon}(p, d)] = 1 - \int_{d - \epsilon}^{d + \epsilon} \xi(p|x) dp.
+        $$
+        The Bayes estimator is the argument of $$\max_d \int_{d - \epsilon}^{d
+        + \epsilon} \xi(p|x) \, dp = \max_d \int_{d-\epsilon}^{d + \epsilon}
+        p^x(1-p)^{n-x}\, dp.$$
+
+        We extend the definition of $\xi(p|x)$ to the real line such
+        that $\xi(p|x) = 0, \forall p \not\in [0,1]$. Fix $x$ and let 
+        $$G(d) = \int_{d-\epsilon}^{d + \epsilon}
+        \xi(p|x)\, dp.$$ 
+        
+        Function $G$ is defined in the decision space $[0,1]$ and it is
+        continuos. By Weierstrass' theorem \cite{weierstrass}, $G$ has a global maximum. It can
+        not be on the limits, because $G(0) < G(\epsilon)$ and $G(1) < G(1 - \epsilon)$
+        for every $\epsilon > 0$. If $\bar{d}_{\epsilon} \in (0,1)$ is global maximum, 
+        $$
+        G'(d) = \xi(\bar{d}_{\epsilon}+\epsilon|x) - \xi(\bar{d}_{\epsilon}-\epsilon|x) = 0.
+        $$
+        Then $\xi(\bar{d}_{\epsilon} + \epsilon) = \xi(\bar{d}_{\epsilon} - \epsilon) \implies
+        \log(\xi(\bar{d}_{\epsilon} + \epsilon)) = \log(\xi(\bar{d}_{\epsilon} - \epsilon))$. By
+        Rolle's theorem \cite{rolle}, there exists $d^{*}_{\epsilon} \in
+        (\bar{d}_{\epsilon} - \epsilon, \bar{d}_{\epsilon} + \epsilon)$ such
+        that 
+        $$
+        0 = \frac{d}{d \delta} \log \xi(d^{*}_{\epsilon}|x) = \frac{x}{d^{*}_{\epsilon}} - \frac{n-x}{1 - d^{*}_{\epsilon}} \implies d^{*}_{\epsilon} = \frac{x}{n}.
+        $$
+        Observe that we can drop the dependence on $\epsilon$ and for every $\epsilon > 0$, if $\bar{d}_{\epsilon}$ is global
+        maximum, 
+        $$d^* = \frac{x}{n} \in (\bar{d}_{\epsilon} - \epsilon,
+        \bar{d}_{\epsilon} + \epsilon).$$        
+
+        Therefore, if $\bar{d}_{\epsilon}$ forms a sequence of Bayes
+        estimates associated with the sequence of losses $L_{\epsilon}(p,d)$, we conclude that $\bar{d}_{\epsilon}$ converges to $d^*$
+        for each $x$ when $\epsilon \to 0$. 
+
+        In summary the Bayes estimator for 0-1 loss is $\delta^{\pi}(x) = \frac{x}{n}$. 
+    \end{enumerate}
+\end{proof}

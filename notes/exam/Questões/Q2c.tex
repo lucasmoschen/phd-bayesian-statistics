@@ -1,0 +1,22 @@
+\begin{proof}
+    This ``counter-example'' is wrong because the marginal distribution of $x$
+    is wrongly defined. Actually, it should be
+    $$
+    m(x) = \int_0^{\infty} \frac{4x}{\pi}\frac{1}{t(1+t^2)}\mathbbm{1}\{0 \le x \le \sqrt{t}\}dt = \int_{x^2}^{\infty} \frac{4x}{\pi}\frac{1}{t(1+t^2)} \,dt
+    $$
+    Then 
+    \begin{equation*}
+        \begin{split}
+            m(x) &= \int_{x^2}^{\infty} \frac{4x}{\pi}\frac{1}{t(1+t^2)} \, dt \\
+            &=  \frac{4x}{\pi} \int_{x^2}^{\infty} \frac{1}{t} - \frac{t}{1+t^2} \,dt \\
+            &= \frac{2x}{\pi}\left[
+                2\log(t) - \log(1+t^2)
+            \right]_{x^2}^{\infty} \\
+            &= \frac{4x}{\pi}\left[
+                \log\left(\frac{t^2}{1 + t^2}\right)
+            \right]_{x^2}^{\infty} \\
+            &= \frac{4x}{\pi}\log(1 + x^{-2}) < + \infty \iff x > 0
+        \end{split}
+    \end{equation*}
+    Inasmuch $X = 0$ has null measure (as we expected), the posterior is proper almost surely. 
+\end{proof} 

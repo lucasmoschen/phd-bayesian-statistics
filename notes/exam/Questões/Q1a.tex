@@ -1,0 +1,41 @@
+\begin{proof}[Solution]
+    We want to make inference about $p$, the stopping point of the ball $W$. We know that $0 < p < 1$, so we define the
+    parameter space $\Theta = (0,1)$. We are considering $X$ a non-negative
+    integer between $0$ and $n$, that is, $\mathcal{X} = \mathbb{Z}_+ \cap
+    [0,n]$. 
+    
+    Each time we roll the ball $O$, there is a uniform probability of
+    stopping between $0$ and $L = 1$. Then, 
+    $$\Pr(\text{position of } O < \text{position of } W) = \Pr(\text{position of } O < p) = p$$
+    and each trial has a probability $p$ of success and $1-p$ of fail. Moreover,
+    we do $n$ experiments conditionally independents, what implies that the
+    data-generating mechanism is a Binomial distribution with parameters $n$ and $p$, that is,
+    $X \sim Bin(n,p)$. 
+
+    The density of $X$ is given by the expression 
+    $$
+    f(x|n,p) = \binom{n}{x} p^x(1 - p)^{n-x}.
+    $$
+    We'll drop the conditionality of $n$ and suppose it's fixed. Then, the
+    likelihood is 
+    $$
+    L(p|x) =  \genfrac(){0pt}{0}{n}{x} p^x(1 - p)^{n-x}
+    $$
+
+    with respect to the counting measure. We defined the essential elements
+    for a simple statistical inference. Now we must define the crucial elements of a Bayesian analysis: 
+
+    \begin{enumerate}
+        \item[(1)] Prior distribution: $\pi(p) = 1$ (over the space $\Theta$).
+        This is because we have prior knowledge that the position of ball $W$ has a uniform probability
+        between $0$ and $L = 1$. 
+        \item[(2)] Loss function: The problem didn't express it, however  it's
+        important to evaluate the quality of our inference. We can consider
+        the absolute loss, because we are measuring the distance between
+        points in a line. 
+    \end{enumerate}
+
+    The dominating measure in $\Theta$ is the Lebesgue measure and the
+    dominating measure in $\mathcal{X}$ (which defines the likelihood
+    function \cite{schervish1996theory}) is the counting measure. 
+\end{proof}

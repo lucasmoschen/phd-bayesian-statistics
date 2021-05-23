@@ -1,0 +1,35 @@
+\begin{proof}[Solution] We use $\log(1/\eta) = -\log(\eta)$. Let's divide the calculation in the following steps:
+    \begin{enumerate}
+        \item[(1)] The log-likelihood is
+         $$l(\eta|x) = \log L(\eta|x) = \log(2/t^2) + \log(x) +
+        \log(\log(1/\eta)) + \frac{x^2}{t^2}\log(\eta);$$
+        \item[(2)] The first derivative of $l$ is $$\frac{d}{d\eta} l(\eta|x)
+        = \frac{\frac{d}{d\eta}\log(1/\eta)}{\log(1/\eta)} +
+        \frac{x^2}{t^2}\frac{1}{\eta} = -\frac{1}{\eta\log(1/\eta)} +
+        \frac{x^2}{t^2}\frac{1}{\eta} = \frac{1}{\eta\log(\eta)} +
+        \frac{x^2}{t^2}\frac{1}{\eta};$$
+        \item[(3)] The second derivative of $l$ is $$\frac{d^2}{d\eta^2}
+        l(\eta|x)=-\frac{1 + \log(\eta)}{(\eta\log(\eta))^2} -
+        \frac{x^2}{t^2}\frac{1}{\eta^2};$$
+        \item[(4)] The second moment of Rayleigh distribution is
+        $$\ev_{\eta}[X^2] = \frac{2}{t^2}\log(1/\eta)\int_0^{\infty}
+        x^3\eta^{x^2/t^2} dx = \frac{1}{t^2}\log(1/\eta)\int_0^{\infty}
+        y\eta^{y/t^2} dy$$
+        using that $x^2 = y$ and $2x dx = dy$. Integrating by parts the last
+        integral, we obtain 
+        $$
+        \int_0^{\infty} y\eta^{y/t^2} dy = y\frac{t^2}{\log(\eta)}\eta^{y/t^2}\bigg|_0^{\infty} - \frac{t^2}{\log(\eta)}\int_0^{\infty} \eta^{y/t^2} dy = -\frac{t^4}{\log(\eta)^2}\eta^{y/t^2}\bigg|_0^{\infty} = \frac{t^4}{\log(\eta)^2}
+        $$
+        and 
+        $$\ev_{\eta}[X^2] =\frac{\log(1/\eta)}{t^2}\frac{t^4}{\log(\eta)^2} = -\frac{t^2}{\log(\eta)}$$
+        \item[(5)] The Fisher Information is $I(\eta)=$ $$-\ev_{\eta}\left[\frac{d^2}{d\eta^2}
+        l(\eta|x)\right] = \frac{1 + \log(\eta)}{(\eta\log(\eta))^2} +
+        \frac{1}{t^2\eta^2}E_{\eta}[X^2] = \frac{1 + \log(\eta)}{\eta^2\log(\eta)^2} -
+        \frac{1}{\log(\eta)\eta^2} = \frac{1}{\eta^2\log(\eta)^2}$$
+        \item[(6)] The Jeffreys' prior is, then, $$\pi_J(\eta) \propto
+        \frac{1}{\eta|\log(\eta)|} = -\frac{1}{\eta\log(\eta)} =
+        \frac{1}{\eta\log(1/\eta)}$$
+        a improper prior in $(0,1)$. We emphasize that $\log(\eta) \le 0$,
+        because $\eta \le 1$. 
+    \end{enumerate}
+\end{proof}

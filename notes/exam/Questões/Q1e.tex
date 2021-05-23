@@ -1,0 +1,26 @@
+\begin{proof}[Solution]
+    Let $Z \sim Bin(m,p)$. The predictive density of $Z$ is
+    \begin{equation*}
+        \begin{split}
+            g^{\pi}(z|x) &= \frac{1}{B(x+1, n-x+1)}\int_0^1 \binom{m}{z}p^z(1-p)^{m-z}p^x(1-p)^{n-x} \, dp \\
+            &= \frac{1}{B(x+1, n-x+1)}\binom{m}{z}\int_0^1 p^{z+x}(1-p)^{m+n-(z+x)} \, dp \\
+            &= \frac{B(z+x+1, m+n-(z+x)+1)}{B(x+1, n-x+1)}\binom{m}{z} \\
+            &= \frac{B(z+7, m-z+4)}{B(7,4)}\binom{m}{z}. 
+        \end{split}
+    \end{equation*} 
+
+    Now, we want to make a point prediction through the expected value and we
+    call it $\delta^{pred}(x)$. Hence,  
+    \begin{equation*}
+        \begin{split}
+            \delta^{pred}(6) &= \sum_{z=0}^m z \cdot g^{\pi}(z|x) \\
+            &= \sum_{z=1}^m \frac{B(z+7, m-z+4)}{B(7,4)}\frac{m!}{(z-1)!(m-z)!} \\ 
+            &= m\sum_{z=1}^m \frac{B((z-1)+8, (m-1)-(z-1)+4)}{B(7,4)}\frac{(m-1)!}{(z-1)!(m-1-(z-1))!} \\ 
+            &= \frac{m}{B(7,4)}\sum_{z=0}^{m-1} B(z+8, (m-1)-z+4)\frac{(m-1)!}{z!(m-1 - z)!} \\ 
+            &= m\frac{B(8,4)}{B(7,4)} = \frac{7}{11}m,
+        \end{split}
+    \end{equation*}
+    because $\frac{B(8,4)}{B(7,4)} = \frac{7!3!10!}{6!3!11!} = \frac{7}{11}$.
+    Therefore, we expect $7/11$ of the $m$ balls to fall before $p$ and $4/11$
+    after $p$.
+\end{proof}
