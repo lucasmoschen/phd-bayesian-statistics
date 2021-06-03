@@ -1,0 +1,80 @@
+\vspace{2ex}
+
+\fbox{\parbox{0.92\textwidth}{
+    {\bf Solution.} The only restriction prior to the data we have is that $N \in
+    \mathbb{Z}^+$. Therefore we are looking for a distribution in this space.
+    We can follow the assumption made by \cite{Raftery1988} where $N \sim
+    \Poi(\mu)$. Other approach is to consider $N \sim \Geom(\nu)$.
+
+    The first approach has the advantage in calculations. When 
+    $$x_i | N, \theta \sim \Bin(N,\theta)$$ and $$N \sim \Poi(\mu),$$ we have that $x_i \sim
+    \Poi(\mu\cdot\theta)$, as proved in Appendix \ref{sec:binomial-poisson}. And we can convert prior information in $x_i$ in
+    terms of our beliefs about its mean. 
+
+    The second approach serves as a comparative. The interesting part of this
+    distribution is the compact domain since $\nu \in [0,1]$. From that, we
+    can build a model that caries the correlation between $\nu$ and $\theta$
+    whenever necessary in a direct way: we transform the variables to logistic
+    space and defines a bivariate normal distribution. We would have to define
+    five parameters, but this is a good extension. 
+
+    \vspace{2ex}
+
+    {\bf Priors to the hyperparameters}
+
+    \vspace{2ex}
+
+    Now we shall define the priors to the hyperparameters. Define $\lambda =
+    \mu\cdot\theta$. Given that it is morel likely that previous research made
+    statements about $x_i$, we use the same idea as Raftery considering the
+    prior over $(\lambda, \theta)$. I will assume they are independent from
+    now on with 
+    $$
+    \lambda \sim \DGamma(\alpha, \beta),
+    $$
+    and
+    $$
+    \theta \sim \Beta(a,b).
+    $$
+
+    The other approach will have two settings. First I suppose $\nu$ and
+    $\theta$ independents with 
+    $$
+    \nu \sim \Beta(\alpha_1, \beta_1)
+    $$
+    and
+    $$
+    \theta \sim \Beta(\alpha_2, \beta_2).
+    $$
+    I choose the Beta distribution because it has a flexible shape with
+    a good intuition behind it. Other point is that the Beta distribution
+    forms a conjugate family for the Geometric distribution. Another set up is
+    to consider the correlated case. We do it in the following way:
+    $$
+    \begin{pmatrix}
+        logit(\nu) \\ logit(\theta) 
+    \end{pmatrix} \sim \Normal(\mu, \Sigma).
+    $$
+}
+}
+
+\fbox{\parbox{0.92\textwidth}{
+This choice is intrinsically linked to the fact the the normal distribution is
+a good approximation to a series of events, and it has a very good
+interpretation of the parameters. The problem with this approach is that it is
+harder to codify prior information. We necessarily need information about
+\begin{enumerate}
+    \item[{\bf(i)}] Beliefs about $N$: if we access previous information about
+   the mean, we can think about $(1 - \nu)/\nu$.
+   \item[{\bf(ii)}] Beliefs about $\theta$. 
+   \item[{\bf(iii)}] Beliefs about how these parameters relate. This is the
+   harder part, and may have less research.  
+\end{enumerate}
+
+From these three approaches, I will call them in the text (1) Raftery
+approach, (2) Geometric and independent approach, and (3) Geometric and
+correlated approach. 
+
+}}
+
+\vspace{2ex}
