@@ -1,9 +1,112 @@
 \vspace{2ex}
 
 \fbox{\parbox{0.92\textwidth}{
-    {\bf Solution.} \lipsum[1]
+    {\bf Solution.} For the Geometric and correlated approach, it may be impossible to find a simple
+    expression. 
+
+    Generally speaking, by Bayes' Theorem, 
+    \begin{equation}
+    \label{eq:bayes-theorem}
+    \begin{split}
+        p(\xi|\bx) &\propto l(\xi|\bx)\cdot\pi(\xi) \\
+        &= \left(\prod_{i=1}^n \binom{N}{x_i}\theta^{x_i}(1 - \theta)^{N-x_i}\right)\cdot \pi(\xi) \\
+        &= \left(\prod_{i=1}^n \binom{N}{x_i}\right)\theta^{S}(1 - \theta)^{nN - S}\cdot \pi(\xi), 
+    \end{split}
+    \end{equation}
+    where $S = \sum_{i=1}^n x_i$. We shall derive for each case the prior
+    $\pi(\xi)$. 
+
+    \begin{enumerate}
+        \item[(1)] {\bf Raftery}: 
+        \begin{equation*}
+            \begin{split}
+                \pi(\xi) &= \int_0^{\infty} \pi(\xi, \lambda) \, d\lambda \\
+                &= \int_0^{\infty} \pi(N|\theta,\lambda)\pi(\theta,\lambda) \, d\lambda \\
+                &= \int_0^{\infty} \frac{e^{-\lambda/\theta}(\lambda/\theta)^{N}}{N!}\pi(\lambda)\pi(\theta) \, d\lambda\\
+                &\propto  \int_0^{\infty} \frac{e^{-\lambda/\theta}(\lambda/\theta)^{N}}{N!}\lambda^{\alpha - 1}e^{-\beta \lambda}\theta^{a-1}(1-\theta)^{b-1}\one(0<\theta<1) \, d\lambda\\
+                &= \frac{\theta^{a-1-N}(1-\theta)^{b-1}}{N!}\one(0<\theta<1)\int_0^{\infty} \lambda^{\alpha + N - 1}e^{-(\beta + 1/\theta)\lambda} \, d\lambda \\
+                &= \frac{\theta^{a-1-N}(1-\theta)^{b-1}}{N!}\one(0<\theta<1)\cdot \frac{\Gamma(\alpha+N)}{(\beta + 1/\theta)^{\alpha + N}},
+            \end{split}
+        \end{equation*}
+        since the integrand is the kernel of a gamma distribution. Therefore,
+        rewriting,
+        \begin{equation}
+            \label{eq:prior-raftery}
+            \pi(\xi) \propto \frac{\Gamma(\alpha+N)\theta^{a-1-N}(1-\theta)^{b-1}}{(\beta + 1/\theta)^{\alpha + N}N!}\one(0<\theta<1)
+        \end{equation}
+        and
+        \begin{equation}
+            \label{eq:posterior-raftery}
+            p(\xi|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{\Gamma(\alpha+N)\theta^{a+S-1-N}(1-\theta)^{b+nN-S-1}}{(\beta + 1/\theta)^{\alpha + N}N!}\one(0<\theta<1)
+        \end{equation} 
+    \end{enumerate}
 }
 }
+
+\fbox{\parbox{0.92\textwidth}{
+
+\begin{enumerate}
+
+    \item[(2)] {\bf Geometric and independent}: 
+        
+    \begin{equation*}
+        \begin{split}
+            \pi(\xi) &= \int_0^{1} \pi(\xi, \nu) \, d\nu \\
+            &= \int_0^{1} \pi(N|\nu,\theta)\pi(\nu)\pi(\theta) \, d\nu \\
+            &\propto \theta^{\alpha_2-1}(1-\theta)^{\beta_2-1} \one(0<\theta<1) \int_0^{1} (1-\nu)^N\nu \cdot\nu^{\alpha_1 - 1}(1-\nu)^{\beta_1-1}\, d\nu \\
+            &= \theta^{\alpha_2-1}(1-\theta)^{\beta_2-1} \one(0<\theta<1) \int_0^{1} \nu^{\alpha_1}(1-\nu)^{N+\beta_1-1}\, d\nu \\
+            &= \theta^{\alpha_2-1}(1-\theta)^{\beta_2-1} \one(0<\theta<1) B(\alpha_1+1,N+\beta_1), 
+        \end{split}
+    \end{equation*}
+    since the integrand is the kernel of a Beta distribution. Rewriting, 
+    \begin{equation}
+        \label{eq:prior-geom-iden}
+        \pi(\xi) \propto B(\alpha_1+1,N+\beta_1)\theta^{\alpha_2-1}(1-\theta)^{\beta_2-1} \one(0<\theta<1) 
+    \end{equation}
+    and 
+    \begin{equation}
+        \label{eq:posterior-geom-iden}
+        \pi(\xi|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right) B(\alpha_1+1,N+\beta_1)\theta^{S + \alpha_2-1}(1-\theta)^{nN + \beta_2-S-1} \one(0<\theta<1) 
+    \end{equation}
+
+    \item[(3)]  {\bf Geometric and correlated}: This is the harder case. I
+    have to derive $\pi(\nu,\theta)$ from $\pi(\logit(\nu), \logit(\theta))$.
+    Define $f(x_1,x_2) = (\logit^{-1}(x_1), \logit^{-1}(x_2))$. This is an
+    invertible function with $f^{-1}(y_1,y_2) = (\logit(y_1), \logit(y_2))$. By
+    the change of variables, 
+    $$
+    \pi(\nu,\theta) = \pi(f^{-1}(\nu, \theta))\cdot\left|\det \left[\frac{df^{-1}(z)}{dz}\bigg|_{z=(\nu,\theta)}\right]\right|.
+    $$
+    Observe that 
+    $$
+    \det \left[\frac{df^{-1}(z)}{dz}\bigg|_{z=(\nu,\theta)}\right] = \det \begin{bmatrix}
+        \frac{d}{d\nu}\logit(\nu) & 0 \\
+        0 & \frac{d}{d\theta}\logit(\theta)
+    \end{bmatrix} = \frac{d}{d\nu}\logit(\nu) \cdot \frac{d}{d\theta}\logit(\theta).
+    $$
+    By the calculation of the Jacobian, we can join everything
+    \begin{equation*}
+        \begin{split}
+            \pi(\xi) &= \int_0^{1} \pi(N|\nu,\theta)\pi(\nu,\theta) \, d\nu  \\
+            &= \int_0^1 (1-\nu)^N\nu \pi(\logit(\nu), \logit(\theta))|\logit '(\nu) \cdot \logit '(\theta)| \, d\nu \\
+            &= \int_0^1 (1-\nu)^N\nu \pi(\logit(\nu), \logit(\theta))\frac{1}{\nu(1-\nu)\theta(1-\theta)}\, d\nu \\ 
+            &= \frac{1}{\theta(1-\theta)}\int_0^1 (1-\nu)^{N-1}\pi(\logit(\nu), \logit(\theta)) \, d\nu . \\
+        \end{split}
+    \end{equation*} 
+    Let $z = (\logit(\nu), \logit(\theta))$. Therefore, 
+    \begin{equation}
+        \label{eq:prior-geom-corr}
+        \pi(\xi) \propto \frac{1}{\theta(1-\theta)}\int_0^1 (1-\nu)^{N-1}\exp\left\{-\frac{1}{2}(z - \eta)^T\Sigma^{-1}(z-\eta)\right\} \, d\nu
+    \end{equation}
+    and 
+    \begin{equation}
+        \label{eq:posterior-geom-corr}
+        \pi(\xi|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\theta^{S-1}(1 - \theta)^{nN - S-1}\int_0^1 (1-\nu)^{N-1}\exp\left\{-\frac{1}{2}(z - \eta)^T\Sigma^{-1}(z-\eta)\right\} \, d\nu.
+    \end{equation}
+
+\end{enumerate}
+
+}}
 
 
 \vspace{2ex}

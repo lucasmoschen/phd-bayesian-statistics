@@ -52,8 +52,8 @@
     to consider the correlated case. We do it in the following way:
     $$
     \begin{pmatrix}
-        logit(\nu) \\ logit(\theta) 
-    \end{pmatrix} \sim \Normal(\mu, \Sigma).
+        \logit(\nu) \\ \logit(\theta) 
+    \end{pmatrix} \sim \Normal(\eta, \Sigma).
     $$
 }
 }
@@ -62,18 +62,13 @@
 This choice is intrinsically linked to the fact the the normal distribution is
 a good approximation to a series of events, and it has a very good
 interpretation of the parameters. The problem with this approach is that it is
-harder to codify prior information. We necessarily need information about
-\begin{enumerate}
-    \item[{\bf(i)}] Beliefs about $N$: if we access previous information about
-   the mean, we can think about $(1 - \nu)/\nu$.
-   \item[{\bf(ii)}] Beliefs about $\theta$. 
-   \item[{\bf(iii)}] Beliefs about how these parameters relate. This is the
-   harder part, and may have less research.  
-\end{enumerate}
+harder to codify prior information. We necessarily need information about $N$,
+$\theta$, and how they relate. 
 
-From these three approaches, I will call them in the text (1) Raftery
-approach, (2) Geometric and independent approach, and (3) Geometric and
-correlated approach. 
+From these three approaches, I will call these approaches in the text (1)
+{\em Raftery approach}, (2) {\em Geometric and independent approach}, and (3)
+{\em Geometric
+and correlated approach}. 
 
 }}
 
