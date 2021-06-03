@@ -7,9 +7,9 @@ Covered material
 
 - Likelihood, Sufficiency and Conditional Principles.
 - Decision theory in the Bayesian Statistics theory.
-- Prior distribuion elicitation. 
+- Prior distribution elicitation. 
 - Bayesian point estimation, Bayes estimator and sampling models. 
 - Bayesian testing and confidence region.
 - Model choice.
 - Asymptotic behaviour of the posterior distribution.
-- Examples of the real world. 
+- Examples from the real world. 
