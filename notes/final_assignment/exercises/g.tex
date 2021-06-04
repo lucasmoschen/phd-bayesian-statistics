@@ -7,10 +7,64 @@
     \cite{github}. We proved that the posterior $p_2$ is proper in exercise (e).
     Now we derive the posterior predictive distribution
     $$
-    g(\tilde{x}|\bx) = \sum_{N=x_{\max}}^{\infty} \int_0^1 \binom{N}{\tilde{x}} \theta^{\tilde{x}}(1-\theta)^{N-\tilde{x}}p(\xi|\bx) d\theta
+    g(\tilde{x}|\bx) = \sum_{N=x_{\max}}^{\infty} \int_0^1 f(\tilde{x}, \bx|\xi)\pi(\xi) d \, \theta
     $$
+    for each of the four priors. Let $x_{n+1} = \tilde{x}$ for notation simplification.
+
+    \begin{enumerate}
+        \item[(1)] {\bf Raftery:} Consider the prior from expression
+        \ref{eq:prior-raftery}. 
+        
+        Let $S' = S + x_{n+1}$ and $x'_{\max} =
+        \max(x_{\max}, x_{n+1})$.
+    \end{enumerate}
 }
 }
+
+\fbox{\parbox{0.92\textwidth}{
+    \begin{equation*}
+        \begin{split}
+            g_1(x_{n+1}|\bx) &\propto \sum_{N=x_{\max}}^{\infty} \int_0^1 \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\}\theta^{S'}(1-\theta)^{(n+1)N-S'}\frac{\Gamma(\alpha+N)\theta^{a-1-N}(1-\theta)^{b-1}}{(\beta + 1/\theta)^{\alpha + N}N!} d \, \theta \\
+            &= \sum_{N=x_{\max}}^{\infty} \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\}\frac{\Gamma(\alpha + N)}{N!}\int_0^1 \frac{\theta^{a+S'-1-N}(1-\theta)^{(n+1)N-S'+b-1}}{(\beta + 1/\theta)^{\alpha + N}} d \, \theta. \\
+        \end{split}
+    \end{equation*} 
+
+    \begin{enumerate}
+        \item[(2)] {\bf Uninformative:} This case is the same as Raftery, with
+        $a = b = 1$ and $\alpha = \beta = 0$. Then,
+        \begin{equation*}
+            \begin{split}
+                g_2(x_{n+1}|\bx) &\propto \sum_{N=x_{\max}}^{\infty} \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\}\frac{\Gamma(N)}{N!}\int_0^1 \frac{\theta^{S'\cancel{-N}}(1-\theta)^{(n+1)N-S'}}{\cancel{(1/\theta)^{N}}} d \, \theta \\
+                &= \sum_{N=x_{\max}}^{\infty} \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\}\frac{1}{N}\int_0^1 \theta^{S'}(1-\theta)^{(n+1)N-S'} d \, \theta \\
+                &= \sum_{N=x_{\max}}^{\infty} \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\}\frac{1}{N} B(S'+1, (n+1)N-S'+1)\\
+                &= \sum_{N=x_{\max}}^{\infty} \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\}\frac{S'![(n+1)N-S']!}{[(n+1)N+1]! N}.
+            \end{split}
+        \end{equation*} 
+
+        \item[(3)] {\bf Geometric independent:} Consider the prior from
+        expression \ref{eq:prior-geom-iden}. 
+
+        Let $B_N = B(\alpha_1+1,N+\beta_1)$ to reduce the size of the
+        expression. Then
+        \begin{equation*}
+            \begin{split}
+                g_3(x_{n+1}|\bx) &\propto \sum_{N=x_{\max}}^{\infty} \int_0^1 \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\}\theta^{S'}(1-\theta)^{(n+1)N-S'}B_N\theta^{\alpha_2-1}(1-\theta)^{\beta_2-1} \,d\theta \\
+                &= \sum_{N=x_{\max}}^{\infty} \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\}  B_N \int_0^1 \theta^{S'+\alpha_2-1}(1-\theta)^{(n+1)N+\beta_2-S'-1} \, d\theta \\
+                &= \sum_{N=x_{\max}}^{\infty} \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\} B(\alpha_1 + 1, N + \beta_1) B(S' + \alpha_2, (n+1)N + \beta_2 - S'). 
+            \end{split}
+        \end{equation*} 
+
+        \item[(4)] {\bf Geometric correlated:} Consider the prior expression \ref{eq:prior-geom-corr}.
+        \begin{equation*}
+            \begin{split}
+                g_4(x_{n+1}|\bx) &\propto \sum_{N=x_{\max}}^{\infty} \int_0^1 \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\}\theta^{S'}(1-\theta)^{(n+1)N-S'} \frac{1}{\theta(1-\theta)} \\ 
+                & \qquad\qquad\qquad \times \int_0^1 (1-\nu)^{N-1}\exp\left\{-\frac{1}{2}(z - \eta)^T\Sigma^{-1}(z-\eta)\right\} \, d\nu \\
+                &= \sum_{N=x_{\max}}^{\infty} \left\{\prod_{i=1}^{n+1}\binom{N}{x_i}\right\} \int_0^1 \theta^{S'-1}(1-\theta)^{(n+1)N-S'-1} \\   
+                & \qquad\qquad\qquad\qquad\qquad \times \int_0^1 (1-\nu)^{N-1}\exp\left\{-\frac{1}{2}(z - \eta)^T\Sigma^{-1}(z-\eta)\right\} \, d\nu \, d\theta. \\
+            \end{split}
+        \end{equation*} 
+    \end{enumerate}
+}}
 
 
 \vspace{2ex}
