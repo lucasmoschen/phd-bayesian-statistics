@@ -1,9 +1,58 @@
 \vspace{2ex}
 
 \fbox{\parbox{0.92\textwidth}{
-    {\bf Solution.} \lipsum[1]
+    {\bf Solution.} For an uninformative prior, for instance, we could
+    consider in the Raftery approach $\alpha, \beta \to 0$. When we do that,
+    we obtain 
+    $$
+    \pi(\lambda) \propto \lambda^{-1},
+    $$
+    an improper prior and $a = b = 1$,  what implies $\theta$ uniformly
+    distributed on the interval $(0,1)$. In that regard, 
+    \begin{equation*}
+        p_2(N|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{\Gamma(N)}{N!} \int_0^1 \frac{\theta^{S-\cancel{N}}(1-\theta)^{nN-S}}{\cancel{\theta^{-N}}} \, d\theta = \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{B(S+1,nN-S+1)}{N} .
+    \end{equation*}
 }
 }
+
+\fbox{\parbox{0.92\textwidth}{
+    Simplifing, we have 
+    \begin{equation}
+        \label{eq:p2-posterior}
+        p_2(N|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{(nN-S)!}{(nN+1)!N}.
+    \end{equation}
+ 
+    We need to prove $p_2$ defines a probability distribution with a correct
+    constant. 
+    Observe that, 
+    \begin{equation*}
+        \begin{split}
+        \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{(nN-S)!}{(nN+1)!N} &= \frac{1}{N\prod_{i=1}^n x_i!}\frac{\prod_{i=1}^n\prod_{j=1}^{x_i} (N - x_i + j)}{\prod_{k=1}^{S+1}(nN - S + k)}\frac{N^{-(S+1)}}{N^{-(S+1)}}  \\
+        &\propto \frac{1}{N^2}\frac{\prod_{i=1}^n\prod_{j=1}^{x_i} (1 - (x_i - j)/N)}{\prod_{k=1}^{S+1}(n - (S - k)/N)} 
+        \end{split}
+    \end{equation*}
+    given that in the numerator we have $x_1 + ... + x_n = S$ factors, while
+    in the dominator we have $S+1$. Observe that, taking $n \ge 2$, for every $i, j$, and $k$ if $N
+    \ge S$, 
+    $$
+    1 - (x_i - j)/N < 1
+    $$
+    and $n - (S - k)/N \ge n - 1 + 1/N > 1$. Therefore, if $N \ge S$
+    $$
+    \frac{1}{N^2}\frac{\prod_{i=1}^n\prod_{j=1}^{x_i} (1 - (x_i - j)/N)}{\prod_{k=1}^{S+1}(n - (S - k)/N)} \le \frac{1}{N^2}.
+    $$
+    and 
+    $$
+    \sum_{N=x_{\max}}^{\infty} \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{(nN-S)!}{(nN+1)!N} \le \sum_{x_{\max}}^{S-1} \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{(nN-S)!}{(nN+1)!N} + \sum_{N=S}^{\infty} \frac{1}{N^2} < +\infty,
+    $$
+    what proves $p_2(N|x)$ is a probability distribution given the right
+    constant. If $n=1$, we have that 
+    $$
+    \binom{N}{x}\frac{(N-x)!}{(N+1)!N} \propto \frac{1}{N(N+1)} \le \frac{1}{N^2}
+    $$
+    also convergent.
+
+}}
 
 
 \vspace{2ex}

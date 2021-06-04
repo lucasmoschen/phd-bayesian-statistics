@@ -9,8 +9,8 @@
     \label{eq:bayes-theorem}
     \begin{split}
         p(\xi|\bx) &\propto l(\xi|\bx)\cdot\pi(\xi) \\
-        &= \left(\prod_{i=1}^n \binom{N}{x_i}\theta^{x_i}(1 - \theta)^{N-x_i}\right)\cdot \pi(\xi) \\
-        &= \left(\prod_{i=1}^n \binom{N}{x_i}\right)\theta^{S}(1 - \theta)^{nN - S}\cdot \pi(\xi), 
+        &= \left(\prod_{i=1}^n \binom{N}{x_i}\theta^{x_i}(1 - \theta)^{N-x_i}\one(N \ge x_i)\right)\cdot \pi(\xi) \\
+        &= \left(\prod_{i=1}^n \binom{N}{x_i}\right)\theta^{S}(1 - \theta)^{nN - S}\cdot \pi(\xi)\cdot\one(N\ge x_{\max}), 
     \end{split}
     \end{equation}
     where $S = \sum_{i=1}^n x_i$. We shall derive for each case the prior
@@ -37,7 +37,7 @@
         and
         \begin{equation}
             \label{eq:posterior-raftery}
-            p(\xi|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{\Gamma(\alpha+N)\theta^{a+S-1-N}(1-\theta)^{b+nN-S-1}}{(\beta + 1/\theta)^{\alpha + N}N!}\one(0<\theta<1)
+            p(\xi|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{\Gamma(\alpha+N)\theta^{a+S-1-N}(1-\theta)^{b+nN-S-1}}{(\beta + 1/\theta)^{\alpha + N}N!}\one(0<\theta<1, N\ge x_{\max})
         \end{equation} 
     \end{enumerate}
 }
@@ -66,7 +66,7 @@
     and 
     \begin{equation}
         \label{eq:posterior-geom-iden}
-        \pi(\xi|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right) B(\alpha_1+1,N+\beta_1)\theta^{S + \alpha_2-1}(1-\theta)^{nN + \beta_2-S-1} \one(0<\theta<1) 
+        p(\xi|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right) B(\alpha_1+1,N+\beta_1)\theta^{S + \alpha_2-1}(1-\theta)^{nN + \beta_2-S-1} \one(0<\theta<1, N \ge x_{\max}) 
     \end{equation}
 
     \item[(3)]  {\bf Geometric and correlated}: This is the harder case. I
@@ -98,10 +98,10 @@
         \label{eq:prior-geom-corr}
         \pi(\xi) \propto \frac{1}{\theta(1-\theta)}\int_0^1 (1-\nu)^{N-1}\exp\left\{-\frac{1}{2}(z - \eta)^T\Sigma^{-1}(z-\eta)\right\} \, d\nu
     \end{equation}
-    and 
+    and, for $N \ge x_{\max}$, 
     \begin{equation}
         \label{eq:posterior-geom-corr}
-        \pi(\xi|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\theta^{S-1}(1 - \theta)^{nN - S-1}\int_0^1 (1-\nu)^{N-1}\exp\left\{-\frac{1}{2}(z - \eta)^T\Sigma^{-1}(z-\eta)\right\} \, d\nu.
+        p(\xi|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\theta^{S-1}(1 - \theta)^{nN - S-1}\int_0^1 (1-\nu)^{N-1}\exp\left\{-\frac{1}{2}(z - \eta)^T\Sigma^{-1}(z-\eta)\right\} \, d\nu.
     \end{equation}
 
 \end{enumerate}

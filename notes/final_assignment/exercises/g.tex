@@ -1,7 +1,14 @@
 \vspace{2ex}
 
 \fbox{\parbox{0.92\textwidth}{
-    {\bf Solution.} \lipsum[1]
+    {\bf Solution.} $p_1$ (Raftery), $p_3$ (Geometric independent), and $p_4$
+    (Geometric correlated) are proper since the prior is proper, by Bayes'
+    theorem. For a prove, consult the second question from A1 exam
+    \cite{github}. We proved that the posterior $p_2$ is proper in exercise (e).
+    Now we derive the posterior predictive distribution
+    $$
+    g(\tilde{x}|\bx) = \sum_{N=x_{\max}}^{\infty} \int_0^1 \binom{N}{\tilde{x}} \theta^{\tilde{x}}(1-\theta)^{N-\tilde{x}}p(\xi|\bx) d\theta
+    $$
 }
 }
 

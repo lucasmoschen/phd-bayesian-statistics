@@ -1,9 +1,35 @@
 \vspace{2ex}
 
 \fbox{\parbox{0.92\textwidth}{
-    {\bf Solution.} \lipsum[1]
+    {\bf Solution.} We separate the marginalized posterior:
+    \begin{enumerate}
+        \item[(1)] {\bf Raftery:} Consider the equation
+        \ref{eq:posterior-raftery} and integrate over $\theta$. For $N \ge
+        x_{\max}$, 
+        \begin{equation}
+            p_1(N|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{\Gamma(\alpha+N)}{N!} \int_0^1 \frac{\theta^{a+S-1-N}(1-\theta)^{b+nN-S-1}}{(\beta + 1/\theta)^{\alpha + N}} \, d\theta.
+        \end{equation} 
+        \item[(2)] {\bf Geometric independent:} Consider the equation
+        \ref{eq:posterior-geom-iden} and integrate over $\theta$. For $N \ge
+        x_{\max}$,
+        \begin{equation}
+            \label{eq:p1-geom-indep}
+            \begin{split}
+                p_1(N|\bx) &\propto \left(\prod_{i=1}^n \binom{N}{x_i}\right) B(\alpha_1+1,N+\beta_1)\int_0^1 \theta^{S + \alpha_2-1}(1-\theta)^{nN + \beta_2-S-1} \, d\theta \\
+                &= \left(\prod_{i=1}^n \binom{N}{x_i}\right) B(\alpha_1+1,N+\beta_1)B(S+\alpha_2, nN - S + \beta_2).
+            \end{split}
+        \end{equation}
+        \item[(3)] {\bf Geometric correlated:}  Consider the equation
+        \ref{eq:posterior-geom-corr} and integrate over $\theta$. For $N \ge
+        x_{\max}$, 
+        \begin{equation}
+            \label{eq:p1-geom-corr}
+            \begin{split}
+                p_1(N|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right) \int_0^1 \int_0^1 &\theta^{S-1}(1 - \theta)^{nN - S-1}(1-\nu)^{N-1} \\
+                &\times\exp\left\{-\frac{1}{2}(z - \eta)^T\Sigma^{-1}(z-\eta)\right\} \, d\nu \, d\theta .       
+            \end{split}
+        \end{equation} 
+    \end{enumerate} 
 }
 }
-
-
 \vspace{2ex}
