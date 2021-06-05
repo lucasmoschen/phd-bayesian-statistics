@@ -1,9 +1,24 @@
 \vspace{2ex}
 
 \fbox{\parbox{0.92\textwidth}{
-    {\bf Solution.} \lipsum[1]
-}
-}
+    {\bf Solution.} The Bayes estimator is 
+    $$\delta^{\pi}(\bx) =
+    \arg\min_d \ev^{\pi}[L(d, N)|\bx] = \arg\min_d\ev^{\pi}\left[\left(\frac{d
+    - N}{N}\right)^2|\bx\right].$$
+    In general terms, 
+    \begin{equation}
+        \ev^{\pi}\left[\left(\frac{d
+        - N}{N}\right)^2|\bx\right] = \ev^{\pi}\left[
+            \left(\frac{d^2}{N^2} - 2d\frac{1}{N} + 1 \right)| \bx
+        \right] = d^2\ev^{\pi}[N^{-2}|\bx] -2d\ev^{\pi}[N^{-1}|\bx] + 1.
+    \end{equation}
+    The minimum argument of a quadratic expression is given By
+    $$
+    \delta^{\pi}(\bx) = \frac{\ev^{\pi}[N^{-1}|\bx]}{\ev^{\pi}[N^{-2}|\bx]} = \frac{\sum_{N=x_{\max}}^{\infty} N^{-1} p_i(N|\bx)}{\sum_{N=x_{\max}}^{\infty} N^{-2} p_i(N|\bx)},
+    $$
+    em que $i=1,...,4$. 
 
+}
+}
 
 \vspace{2ex}

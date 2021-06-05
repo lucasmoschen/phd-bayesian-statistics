@@ -6,18 +6,28 @@
     model is identifiable if the implication 
     $$P_{\theta_1} = P_{\theta_2}
     \implies \theta_1 = \theta_2$$ 
-    is true for the model $P_{\theta}$. 
+    is true for the model $P_{\theta}$. Suppose that 
+    $$
+    \binom{N_1}{x} \theta_1^x(1 - \theta_1)^{N_1-x} = \binom{N_2}{x} \theta_2^x(1 - \theta_2)^{N_2-x} 
+    $$
+    for every $x$ between $0$ and $\min(N_1, N_2)$. Suppose $N_1 < N_2$.
+    Therefore the equality is false for $x = N_1 + 1$. iF $N_1 > N_2$, the
+    equality is also false. We conclude $N_1 = N_2$, and, therefore, 
+    $$
+    \frac{\theta_1}{1- \theta_1} = \frac{\theta_2}{1- \theta_2}  \implies \theta_1 = \theta_2.   
+    $$
+    Hence, the binomial model is identifiable. For $n$ observations, take $x_1
+    = ... = x_n = x$. We will have
+    $$
+    f(x|\theta_1, N_1)^n = f(x|\theta_2, N_2)^n \implies f(x|\theta_1, N_1) = f(x|\theta_2, N_2) 
+    $$
+    and the prove follows as previously. 
 
-    \begin{enumerate}
-        \item[(1)] {\bf Raftery:} In this model, the parameters are $\lambda$,
-        $\theta$, and $N$. Suppose 
-        $$
-        \left(\prod_{i=1}^n \binom{N_1}{x_i}\right)\theta_1^{S}(1 - \theta_1)^{nN_1 - S} = \left(\prod_{i=1}^n \binom{N_2}{x_i}\right)\theta_2^{S}(1 - \theta_2)^{nN_2 - S}.    
-        $$
-        
-        
-    \end{enumerate}
-
+    Strictly speaking, given that the prior is proper, and hence the posterior
+    is proper, all the parameters are identifiable. The choice of a suitable
+    prior can resolve the non-identifiability \cite{xie2006}. We can also see
+    in the three models, the posterior of $\xi$ has additional information of
+    the data, coming from the productory and $S$.
 
     }
 }

@@ -12,11 +12,8 @@
     \begin{equation*}
         p_2(N|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{\Gamma(N)}{N!} \int_0^1 \frac{\theta^{S-\cancel{N}}(1-\theta)^{nN-S}}{\cancel{\theta^{-N}}} \, d\theta = \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{B(S+1,nN-S+1)}{N} .
     \end{equation*}
-}
-}
 
-\fbox{\parbox{0.92\textwidth}{
-    Simplifing, we have 
+    Simplifying, we have 
     \begin{equation}
         \label{eq:p2-posterior}
         p_2(N|\bx) \propto \left(\prod_{i=1}^n \binom{N}{x_i}\right)\frac{(nN-S)!}{(nN+1)!N}.
