@@ -1,7 +1,13 @@
 \vspace{2ex}
 
 \fbox{\parbox{0.92\textwidth}{
-    {\bf Solution.} \lipsum[1]
+    {\bf Solution.} I use {\em Stan} platform with {\em PyStan} interface for
+    {\em Python programming language}. The problem is it does not handle
+    unbounded discrete parameters. Therefore we use the approach suggested in
+    the documentation \cite{stan} considering the population size a continuous
+    variable. I tried to use the package {\em PyMC3} for this model (this
+    package handles the discrete parameter), but given convergence problems,
+    we do not present the results. 
 }
 }
 
