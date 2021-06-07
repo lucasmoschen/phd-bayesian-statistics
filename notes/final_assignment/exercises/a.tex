@@ -4,19 +4,22 @@
     {\bf Solution.} The only restriction prior to the data we have is that $N \in
     \mathbb{Z}^+$. Therefore we are looking for a distribution in this space.
     We can follow the assumption made by \cite{Raftery1988} where $N \sim
-    \Poi(\mu)$. Other approach is to consider $N \sim \Geom(\nu)$.
+    \Poi(\mu)$. Other approach I will use is to consider $N \sim \Geom(\nu)$.
 
     The first approach has the advantage in calculations. When 
     $$x_i | N, \theta \sim \Bin(N,\theta)$$ and $$N \sim \Poi(\mu),$$ we have that $x_i \sim
-    \Poi(\mu\cdot\theta)$, as proved in Appendix \ref{sec:binomial-poisson}. And we can convert prior information in $x_i$ in
-    terms of our beliefs about its mean. 
+    \Poi(\mu\cdot\theta)$, as proved in Appendix \ref{sec:binomial-poisson}.
+    And we can transform prior information about the mean of $x_i$ in
+    probability distributions for $\mu\cdot\theta$.
 
-    The second approach serves as a comparative. The interesting part of this
-    distribution is the compact domain since $\nu \in [0,1]$. From that, we
+    \ind The second approach serves as a comparative. The geometric
+    distribution is a simple distribution used for discrete survival
+    distribution, but it is interesting because of its simplicity and the
+    compact domain of the parameter since $\nu \in [0,1]$. 
+    From that, we
     can build a model that caries the correlation between $\nu$ and $\theta$
     whenever necessary in a direct way: we transform the variables to logistic
-    space and defines a bivariate normal distribution. We would have to define
-    five parameters, but this is a good extension. 
+    space and defines a bivariate normal distribution.
 
     \vspace{2ex}
 
@@ -25,7 +28,7 @@
     \vspace{2ex}
 
     Now we shall define the priors to the hyperparameters. Define $\lambda =
-    \mu\cdot\theta$. Given that it is morel likely that previous research made
+    \mu\cdot\theta$. Given that it is more likely that previous research made
     statements about $x_i$, we use the same idea as Raftery considering the
     prior over $(\lambda, \theta)$. I will assume they are independent from
     now on with 
@@ -36,7 +39,8 @@
     $$
     \theta \sim \Beta(a,b).
     $$
-
+    This simplification may be carried, given that the data brings information
+    to the correlation, and it simplifies the math a lot.
     The other approach will have two settings. First I suppose $\nu$ and
     $\theta$ independents with 
     $$
@@ -65,10 +69,8 @@ interpretation of the parameters. The problem with this approach is that it is
 harder to codify prior information. We necessarily need information about $N$,
 $\theta$, and how they relate. 
 
-From these three approaches, I will call these approaches in the text (1)
-{\em Raftery approach}, (2) {\em Geometric and independent approach}, and (3)
-{\em Geometric
-and correlated approach}. 
+\ind From these three approaches, I will call these approaches in the text {\em Raftery approach},  {\em Geometric and independent approach}, and {\em Geometric
+and correlated approach}, respectively. 
 
 }}
 
