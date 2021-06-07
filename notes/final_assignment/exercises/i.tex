@@ -2,12 +2,24 @@
 
 \fbox{\parbox{0.92\textwidth}{
     {\bf Solution.} I use {\em Stan} platform with {\em PyStan} interface for
-    {\em Python programming language}. The problem is it does not handle
+    {\em Python programming language}. The problem is that it does not handle
     unbounded discrete parameters. Therefore we use the approach suggested in
     the documentation \cite{stan} considering the population size a continuous
     variable. I tried to use the package {\em PyMC3} for this model (this
-    package handles the discrete parameter), but given convergence problems,
-    we do not present the results. 
+    package handles discrete parameters), but given convergence problems,
+    I do not present the results. 
+    
+    \hspace{6mm} As I will present posteriorly, this problem
+    may be related to the sampler Metropolis. For the Geometric and
+    independent approach, it is possible to compare the analytic curve with
+    Stan result (considering $N$ a real variable), and Stan got a well
+    approximate result, while PyMC3 had convergence problems.
+
+    \hspace{6mm} In Figures XXX and YYY, I sketch the marginal posterior
+    distributions for each approach and each data set. In table XXX, it is
+    shown the Bayes estimator under quadratic loss (the expected value
+    \cite[Section 4]{Robert2007}), under loss \ref{eq:relative_loss}, and 95\%
+    credibility interval. 
 }
 }
 
