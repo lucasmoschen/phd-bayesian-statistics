@@ -1,6 +1,5 @@
 \vspace{2ex}
 
-\fbox{\parbox{0.92\textwidth}{
     {\bf Solution.} I use {\em Stan} platform with {\em PyStan} interface for
     {\em Python programming language}. The problem is that it does not handle
     unbounded discrete parameters. Therefore we use the approach suggested in
@@ -33,9 +32,9 @@
     interpretation: if we want $\theta$ to have mean 0.5, it will have odds 1
     and log-odds 0. The same for $\nu$. We choose the variance to be the value
     such that the prior variance
-    of $\nu$ and $\theta$ be around the variance of $\nu$ and $\theta$ in the independent case and a negative correlation of $-0.4$, since when the population grows
+    of $\nu$ and $\theta$ be around the variance of $\nu$ and $\theta$ in the independent case and a positive correlation of $0.4$, since when the population grows
     (therefore its mean grows, and $\nu$ decreases), we expect $\theta$ to
-    grow (the probability to see an individual of the population). 
+    decrease (the probability to see a specific individual of the population). 
 
     \vspace{2ex}
 
@@ -55,7 +54,7 @@
     observe the mean is not a robust estimative, while the MRSE changes very
     little. Therefore, the prior modelling is impacted only in the tail. A
     distribution more uninformative generates larger intervals, what is
-    expected. 
+    expected.
 
     \vspace{2ex}
 
@@ -69,10 +68,6 @@
     graphics when compared to the impala data set. The
     uninformative prior generated a much heavier tail, though. 
 
-    \vspace{2ex}
-}
-}
-
 \begin{table}[!ht]
     \centering
     \begin{tabular}{ccccc}
@@ -80,7 +75,7 @@
     \textbf{Model}                 & \multicolumn{4}{c}{\textbf{Parameters}}                                                                           \\ \hline
     \textbf{Raftery}               & $\alpha = 1$       & $\beta =1 $      & $a = 1$                                & $b = 1$                              \\
     \textbf{Geometric independent} & $\alpha_1 = 1$     & $\beta_1 = 1$    & $\alpha_2 = 1$                         & $\beta_2 = 1$                        \\
-    \textbf{Geometric correlated}  & \multicolumn{2}{c}{$\eta = [0, 0]$} & \multicolumn{2}{c}{$\Sigma = \begin{bmatrix} 2.5 & -1.0 \\ -1.0 & 2.5 \end{bmatrix}$} \\ \hline
+    \textbf{Geometric correlated}  & \multicolumn{2}{c}{$\eta = [0, 0]$} & \multicolumn{2}{c}{$\Sigma = \begin{bmatrix} 2.5 & 1.0 \\ 1.0 & 2.5 \end{bmatrix}$} \\ \hline
     \end{tabular}
     \caption{Hyperparameters for the developed models.}
     \label{tab:hyperparameters-models}
@@ -99,10 +94,10 @@
         \hline
         {\bf Models} & {\bf Mean} &  {\bf Median} &   {\bf MRSE} &
         {\bf HDI} \\\hline
-        {\bf Raftery} &   101.96 &   40.23 &  37.68 &  [26.00, 122.34] \\\hline
-        {\bf Uninformative} &  1672.72 &   67.44 &  47.46 &   [26.01, 537.96] \\\hline
-        {\bf Geometric independent} &    64.74 &   46.52 &  41.25 &  [26.01, 135.97] \\\hline
-        {\bf Geometric correlated} &    42.38 &   37.61 &  36.24 &    [26.00, 68.87] \\\hline
+        {\bf Raftery} &   88.98 &   40.65 &  37.88 &  [26.00, 124.75] \\\hline
+        {\bf Uninformative} &  856.54 &   67.41	 &  47.37 &   [26.01, 561.02] \\\hline
+        {\bf Geometric independent} &   65.98 &   46.70 &  41.39 &  [26.02, 137.34] \\\hline
+        {\bf Geometric correlated} &    72.44 &   51.82 &  44.01 &    [26.04, 161.18] \\\hline
         \end{tabular}
         \caption{Point estimates and highest density interval for each model in Impala data set.}
         \label{tab:summary-statistics-posterior-impala}
@@ -120,16 +115,15 @@
     \begin{tabular}{|c|c|c|c|c|}
         \hline
         {\bf Models} &     {\bf Mean} &  {\bf Median} &    {\bf MRSE} &    {\bf HDI} \\\hline
-        {\bf Raftery} &   103.27 &   96.85 &   96.31 &   [74.76, 141.82] \\\hline
-        {\bf Uninformative} &  1398.78 &  237.20 &  155.99 &  [77.17, 2033.14] \\\hline
-        {\bf Geometric independent} &   216.38 &  153.75 &  132.48 &   [76.63, 465.19] \\\hline
-        {\bf Geometric correlated} &   126.48 &  114.18 &  109.82 &   [76.54, 201.52] \\\hline
+        {\bf Raftery} &   104.98 &   97.19 &   96.68 &  [74.74, 143.35] \\\hline
+        {\bf Uninformative} &  1111.69 &  235.74 &  155.66 &  [75.0, 1920.81] \\\hline
+        {\bf Geometric independent} &   221.70 &  154.46 &  132.79 &  [75.08, 470.09] \\\hline
+        {\bf Geometric correlated} &   220.72 &  166.26 &  140.25 &  [78.86, 476.56] \\\hline
     \end{tabular}
     \caption{Point estimates and highest density interval for each model in Waterbuck data set.}
     \label{tab:summary-statistics-posterior-waterbuck}      
 \end{table}
 
-\fbox{\parbox{0.92\textwidth}{
     In order to see if the real approximation used in Stan is good for the
     discrete parameter $N$, we compare the sample generated with the closed-form distributions
     (up to a constant) geometric independent and uninformative. To calculate
@@ -138,13 +132,10 @@
     is good, even though for the uninformative model,
     both suffer from numerical issues.  Because of this we follow with this
     approach. 
-}}
 
 \begin{figure}[!hb]
     \centering
-    \includegraphics[width=\textwidth]{../../images/approximation-analysis-stan.png"}
+    \includegraphics[width=0.812\textwidth]{../../images/approximation-analysis-stan.png"}
     \caption{Approximation analysis of Stan's assumption that $N$ is a positive real number. }
     \label{fig:approximation-stan}
 \end{figure}
-
-\vspace{1cm}

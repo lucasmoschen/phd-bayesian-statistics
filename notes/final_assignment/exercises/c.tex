@@ -1,6 +1,5 @@
 \vspace{2ex}
 
-\fbox{\parbox{0.92\textwidth}{
     {\bf Solution.} I shall verify the likelihood of the model is identifiable
     and it brings the information from the data to the parameter. I say a
     model is identifiable if the implication 
@@ -29,8 +28,17 @@
     in the three models, the posterior of $\xi$ has additional information of
     the data, coming from the productory and $S$.
 
-    }
-}
+    \begin{remark}
+        Throughout the development of the work, I observed a problem in the
+        practical identifiability. In figure \ref{fig:binomial-distribution},
+        we observe three different combinations of parameters which generate
+        similar likelihoods, despite being mathematically different. This may
+        be problematic when we assume the independence of these parameters.
+    \end{remark}
 
-
-\vspace{2ex}
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../../images/binomial-distribution.png}
+    \caption{Binomial distribution for different parameters $n$ and $p$.}
+    \label{fig:binomial-distribution}
+\end{figure}
