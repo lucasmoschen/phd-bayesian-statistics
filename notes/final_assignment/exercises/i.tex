@@ -128,3 +128,23 @@
     \caption{Point estimates and highest density interval for each model in Waterbuck data set.}
     \label{tab:summary-statistics-posterior-waterbuck}      
 \end{table}
+
+\fbox{\parbox{0.92\textwidth}{
+    In order to see if the real approximation used in Stan is good for the
+    discrete parameter $N$, we compare the sample generated with the closed-form distributions
+    (up to a constant) geometric independent and uninformative. To calculate
+    the constant, we sum the values until we reach the zero from {\it NumPy}.
+    From figure \ref{fig:approximation-stan}, we note that the approximation
+    is good, even though for the uninformative model,
+    both suffer from numerical issues.  Because of this we follow with this
+    approach. 
+}}
+
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[width=\textwidth]{../../images/approximation-analysis-stan.png"}
+    \caption{Approximation analysis of Stan's assumption that $N$ is a positive real number. }
+    \label{fig:approximation-stan}
+\end{figure}
+
+\vspace{1cm}
