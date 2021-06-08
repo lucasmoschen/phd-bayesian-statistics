@@ -9,19 +9,122 @@
     package handles discrete parameters), but given convergence problems,
     I do not present the results. 
     
-    \hspace{6mm} As I will present posteriorly, this problem
+    \ind As I will present posteriorly, this problem
     may be related to the sampler Metropolis. For the Geometric and
     independent approach, it is possible to compare the analytic curve with
     Stan result (considering $N$ a real variable), and Stan got a well
     approximate result, while PyMC3 had convergence problems.
 
-    \hspace{6mm} In Figures XXX and YYY, I sketch the marginal posterior
-    distributions for each approach and each data set. In table XXX, it is
+    \vspace{2ex}
+
+    {\bf Choose of the hyperparameters}
+
+    \vspace{2ex}
+
+    \ind In table \ref{tab:hyperparameters-models}, I presented the hyperparameters
+    chosen for the models. Appendix \ref{sec:prior-predictive-checking}, it is
+    presented a simple analysis for it. For the Raftery approach, we chose a
+    uniform distribution on $\theta$ (given we have no information about the
+    populations), and we define the Gamma parameters to have mean and variance
+    1. For the uninformative model, we can't make prior analysis since the
+    improper choice. For the geometric independent model, we set the
+    hyperparameters to have uniform distribution in $(0,1)$. Lastly, the
+    parameters in Geometric correlated model have the following
+    interpretation: if we want $\theta$ to have mean 0.5, it will have odds 1
+    and log-odds 0. The same for $\nu$. We choose the variance to be the value
+    such that the prior variance
+    of $\nu$ and $\theta$ be around the variance of $\nu$ and $\theta$ in the independent case and a negative correlation of $-0.4$, since when the population grows
+    (therefore its mean grows, and $\nu$ decreases), we expect $\theta$ to
+    grow (the probability to see an individual of the population). 
+
+    \vspace{2ex}
+
+    {\bf Impala data set}
+
+    \vspace{2ex}
+
+    \ind In Figures \ref{fig:marginal-posteriors}, I sketch the marginal posterior
+    distributions for each approach. In table \ref{tab:summary-statistics-posterior-impala}, it is
     shown the Bayes estimator under quadratic loss (the expected value
-    \cite[Section 4]{Robert2007}), under loss \ref{eq:relative_loss}, and 95\%
-    credibility interval. 
+    \cite[Section 4]{Robert2007}), under loss \ref{eq:relative_loss} (MRSE),
+    the median point estimate, and 95\%
+    highest density interval (HDI).We observe that the shape of
+    the posterior distributions are quite similar, with fast grow between
+    30-40, and a slow or fast decay, depending on the priors. The more
+    uninformative prior we use, the heavier the tail of the distribution. We
+    observe the mean is not a robust estimative, while the MRSE changes very
+    little. Therefore, the prior modelling is impacted only in the tail. A
+    distribution more uninformative generates larger intervals, what is
+    expected. 
+
+    \vspace{2ex}
+
+    {\bf Waterbuck data set}
+
+    \vspace{2ex}
+
+    \ind In Figures \ref{fig:marginal-posteriors-waterbuck}, I sketch the marginal posterior
+    distributions for each approach. In table \ref{tab:summary-statistics-posterior-waterbuck}, it is
+    shown the summary statistics. We observe a similar behavior from the
+    graphics when compared to the impala data set. The
+    uninformative prior generated a much heavier tail, though. 
+
+    \vspace{2ex}
 }
 }
 
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{ccccc}
+    \hline
+    \textbf{Model}                 & \multicolumn{4}{c}{\textbf{Parameters}}                                                                           \\ \hline
+    \textbf{Raftery}               & $\alpha = 1$       & $\beta =1 $      & $a = 1$                                & $b = 1$                              \\
+    \textbf{Geometric independent} & $\alpha_1 = 1$     & $\beta_1 = 1$    & $\alpha_2 = 1$                         & $\beta_2 = 1$                        \\
+    \textbf{Geometric correlated}  & \multicolumn{2}{c}{$\eta = [0, 0]$} & \multicolumn{2}{c}{$\Sigma = \begin{bmatrix} 2.5 & -1.0 \\ -1.0 & 2.5 \end{bmatrix}$} \\ \hline
+    \end{tabular}
+    \caption{Hyperparameters for the developed models.}
+    \label{tab:hyperparameters-models}
+\end{table}
 
-\vspace{2ex}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../../images/marginal-distributions.png}
+    \caption{Marginal posterior distributions of $N$ for models Raftery, uninformative, geometric independent, and geometric dependent, respectively, for Waterbuck data set.}
+    \label{fig:marginal-posteriors}
+\end{figure}
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        {\bf Models} & {\bf Mean} &  {\bf Median} &   {\bf MRSE} &
+        {\bf HDI} \\\hline
+        {\bf Raftery} &   101.96 &   40.23 &  37.68 &  [26.00, 122.34] \\\hline
+        {\bf Uninformative} &  1672.72 &   67.44 &  47.46 &   [26.01, 537.96] \\\hline
+        {\bf Geometric independent} &    64.74 &   46.52 &  41.25 &  [26.01, 135.97] \\\hline
+        {\bf Geometric correlated} &    42.38 &   37.61 &  36.24 &    [26.00, 68.87] \\\hline
+        \end{tabular}
+        \caption{Point estimates and highest density interval for each model in Impala data set.}
+        \label{tab:summary-statistics-posterior-impala}
+\end{table}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{../../images/marginal-distributions-waterbuck.png}
+    \caption{Marginal posterior distributions of $N$ for models Raftery, uninformative, geometric independent, and geometric dependent, respectively, for Waterbuck data set.}
+    \label{fig:marginal-posteriors-waterbuck}
+\end{figure}
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        {\bf Models} &     {\bf Mean} &  {\bf Median} &    {\bf MRSE} &    {\bf HDI} \\\hline
+        {\bf Raftery} &   103.27 &   96.85 &   96.31 &   [74.76, 141.82] \\\hline
+        {\bf Uninformative} &  1398.78 &  237.20 &  155.99 &  [77.17, 2033.14] \\\hline
+        {\bf Geometric independent} &   216.38 &  153.75 &  132.48 &   [76.63, 465.19] \\\hline
+        {\bf Geometric correlated} &   126.48 &  114.18 &  109.82 &   [76.54, 201.52] \\\hline
+    \end{tabular}
+    \caption{Point estimates and highest density interval for each model in Waterbuck data set.}
+    \label{tab:summary-statistics-posterior-waterbuck}      
+\end{table}
