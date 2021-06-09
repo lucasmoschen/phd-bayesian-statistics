@@ -12,7 +12,9 @@
     may be related to the sampler Metropolis. For the Geometric and
     independent approach, it is possible to compare the analytic curve with
     Stan result (considering $N$ a real variable), and Stan got a well
-    approximate result, while PyMC3 had convergence problems.
+    approximate result, while PyMC3 had convergence problems. I used 50
+    thousand iterations with 5 chains. The parameter adapt delta varied
+    between 0.95 and 0.99. 
 
     \vspace{2ex}
 
@@ -133,9 +135,9 @@
     both suffer from numerical issues.  Because of this we follow with this
     approach. 
 
-\begin{figure}[!hb]
+\begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.812\textwidth]{../../images/approximation-analysis-stan.png"}
+    \includegraphics[width=\textwidth]{../../images/approximation-analysis-stan.png"}
     \caption{Approximation analysis of Stan's assumption that $N$ is a positive real number. }
     \label{fig:approximation-stan}
 \end{figure}

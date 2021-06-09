@@ -8,30 +8,73 @@
     \hat{\mu}^2$, where $\hat{\sigma}^2$ is the sample variance. Therefore, I build the
     following system of equations 
     \begin{gather*}
-        \hat{\mu} = Np, \\
-        \hat{\sigma}^2 = Np(1-p),
+        \hat{\mu} = N\theta, \\
+        \hat{\sigma}^2 = N\theta(1-\theta),
     \end{gather*} 
     that is 
-    $$\hat{\sigma}^2 = \hat{\mu}(1 - p) \implies \hat{p} = 1 -
+    $$\hat{\sigma}^2 = \hat{\mu}(1 - \theta) \implies \hat{\theta} = 1 -
     \frac{\hat{\sigma}^2}{\hat{\mu}}$$
     and
     $$
-    \hat{N} = \frac{\hat{\mu}}{\hat{p}} = \frac{\hat{\mu}^2}{\hat{\mu} - \hat{\sigma}^2}.
+    \hat{N} = \frac{\hat{\mu}}{\hat{\theta}} = \frac{\hat{\mu}^2}{\hat{\mu} - \hat{\sigma}^2}.
     $$
     For instance, the $N_{MME}$ calculated were 56.54 for the impala data set, and 271.84
     for the waterbuck.
 
-    The setup from \cite[Section 3]{Carroll1985} is used to compare the
-    estimators, and to analyse the stability. First, I generate eight samples
+    \ind The used setup to compare the
+    estimators and to analyse the stability is from \cite[Section 3]{Carroll1985}. First, I generate eight samples
     with different parameters, and 
     calculate the four Bayes estimates, besides the moment estimator. For each
-    sample, I also generated a perturbed sample adding one to the largest
-    value.  
+    sample, I also generate a perturbed sample adding one to the largest
+    value. I keep the same hyperparameters defined before except the beta
+    hyperparameters of $\theta$, which I increase to 2, because the
+    non-informative prior was giving low $N$ estimates. The correlation in the
+    last model was increased to 0.8, given the figure
+    \ref{fig:binomial-distribution}. 
     
+    \ind Table \ref{tab:simulations-estimates}
+    presents the results. The first thing we observe is that small values of
+    $\theta$ induces smaller estimates of $N$, therefore it is important to
+    put stronger priors of $\theta$. This can be done studying this parameter
+    in controlled spaces, where it is possible to know the population size.
+    The correlated model increases the estimates, without the need of improper
+    priors. THe moment estimator is undefined in some cases anf more unstable,
+    but not always. 
     
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{}          & \multicolumn{3}{c|}{\textbf{Parameters}} & \multicolumn{5}{c|}{\textbf{Estimators}}                                                 \\ \hline
+        \textbf{Sample}    & \textbf{N}   & \textbf{p}  & \textbf{K}  & \textbf{Raft} & \textbf{Uninf} & \textbf{Geom id} & \textbf{Geom corr} & \textbf{Moment} \\ \hline
+        \textbf{1}         & 75           & 0.32        & 5           & 45.32         & 58.99          & 50.88            & 68.52              & 78.87           \\ \hline
+        \textbf{Perturbed} & 75           & 0.32        & 5           & 47.39         & 63.81          & 53.48            & 72.18              & 105.63          \\ \hline
+        \textbf{2}         & 34           & 0.57        & 4           & 29.05         & 31.57          & 31.07            & 40.95              & 24.18           \\ \hline
+        \textbf{Perturbed} & 34           & 0.57        & 4           & 31.11         & 35.04          & 33.35            & 43.81              & 26.16           \\ \hline
+        \textbf{3}         & 37           & 0.17        & 20          & 22.28         & 27.47          & 20.92            & 27.21              & \textless 0     \\ \hline
+        \textbf{Perturbed} & 37           & 0.17        & 20          & 24.28         & 30.60          & 22.61            & 29.68              & \textless{}0    \\ \hline
+        \textbf{4}         & 48           & 0.06        & 15          & 9.09          & 10.62          & 8.31             & 10.49              & \textless{}0    \\ \hline
+        \textbf{Perturbed} & 48           & 0.06        & 15          & 10.64         & 12.44          & 9.71             & 12.44              & \textless{}0    \\ \hline
+        \textbf{5}         & 40           & 0.17        & 12          & 16.37         & 18.98          & 15.86            & 19.51              & 31.39           \\ \hline
+        \textbf{Perturbed} & 40           & 0.17        & 12          & 18.34         & 21.13          & 17.50            & 21.70              & 61.12           \\ \hline
+        6                  & 74           & 0.68        & 12          & 59.98         & 62.13          & 63.35            & 75.51              & 58.26           \\ \hline
+        \textbf{Perturbed} & 74           & 0.68        & 12          & 61.33         & 64.08          & 65.02            & 77.28              & 59.17           \\ \hline
+        \textbf{7}         & 55           & 0.48        & 20          & 42.51         & 47.14          & 45.57            & 52.93              & 42.78           \\ \hline
+        \textbf{Perturbed} & 55           & 0.48        & 20          & 44.01         & 49.64          & 47.53            & 55.49              & 44.48           \\ \hline
+        \textbf{8}         & 60           & 0.24        & 15          & 29.56         & 35.31          & 30.65            & 37.88              & 37.33           \\ \hline
+        \textbf{Perturbed} & 60           & 0.24        & 15          & 31.46         & 37.97          & 32.72            & 40.81              & 42.84           \\ \hline
+        \end{tabular}
+    \caption{Simulations generated by the parameters $N, \theta$, and $K$, and the estimators calculated by each model, besides the moment estimator. For each sample, the first line indicates the estimates for it, while the second line the estimates fot the perturbed sample, adding one to the largest value.}
+    \label{tab:simulations-estimates}
+\end{table}
     
-    
-    
-    After that, I chose randomly and uniformly $3 \le K \le 22$, $0 <
-    \theta < 1$, and $1 \le N \le 100$. I generate 2000 cases and calculate the
-    quadratic loss.   
+    \ind After that, $3 \le K \le 22$, $0 < \theta < 1$, and $1 \le N \le 100$ was
+    randomly and uniformly chosen. There were 2000 generated cases with these
+    parameters, and we separated them between stable, when $\hat{\mu} \ge (1 +
+    1/\sqrt{2})\hat{\sigma}^2$ and unstable otherwise. We calculated the Bayes
+    estimates and the moment estimate for each to obtain a Monte Carlo loss
+    estimation. The results can be found in table XXX. Several samples had
+    convergence problems (less than 1\%), specially in the uninformative case.
+    I could not spend more time trying to solve this, because it was already
+    too computationally expensive. Few simulations had serious convergence 
+    problems (around 50\%), and were discarded. 
