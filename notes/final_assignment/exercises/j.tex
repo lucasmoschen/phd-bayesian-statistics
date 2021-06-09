@@ -51,10 +51,10 @@
         \textbf{Perturbed} & 75           & 0.32        & 5           & 47.39         & 63.81          & 53.48            & 72.18              & 105.63          \\ \hline
         \textbf{2}         & 34           & 0.57        & 4           & 29.05         & 31.57          & 31.07            & 40.95              & 24.18           \\ \hline
         \textbf{Perturbed} & 34           & 0.57        & 4           & 31.11         & 35.04          & 33.35            & 43.81              & 26.16           \\ \hline
-        \textbf{3}         & 37           & 0.17        & 20          & 22.28         & 27.47          & 20.92            & 27.21              & \textless 0     \\ \hline
-        \textbf{Perturbed} & 37           & 0.17        & 20          & 24.28         & 30.60          & 22.61            & 29.68              & \textless{}0    \\ \hline
-        \textbf{4}         & 48           & 0.06        & 15          & 9.09          & 10.62          & 8.31             & 10.49              & \textless{}0    \\ \hline
-        \textbf{Perturbed} & 48           & 0.06        & 15          & 10.64         & 12.44          & 9.71             & 12.44              & \textless{}0    \\ \hline
+        \textbf{3}         & 37           & 0.17        & 20          & 22.28         & 27.47          & 20.92            & 27.21              & $< 0$     \\ \hline
+        \textbf{Perturbed} & 37           & 0.17        & 20          & 24.28         & 30.60          & 22.61            & 29.68              & $< 0$   \\ \hline
+        \textbf{4}         & 48           & 0.06        & 15          & 9.09          & 10.62          & 8.31             & 10.49              & $< 0$    \\ \hline
+        \textbf{Perturbed} & 48           & 0.06        & 15          & 10.64         & 12.44          & 9.71             & 12.44              & $< 0$   \\ \hline
         \textbf{5}         & 40           & 0.17        & 12          & 16.37         & 18.98          & 15.86            & 19.51              & 31.39           \\ \hline
         \textbf{Perturbed} & 40           & 0.17        & 12          & 18.34         & 21.13          & 17.50            & 21.70              & 61.12           \\ \hline
         6                  & 74           & 0.68        & 12          & 59.98         & 62.13          & 63.35            & 75.51              & 58.26           \\ \hline
@@ -69,12 +69,35 @@
 \end{table}
     
     \ind After that, $3 \le K \le 22$, $0 < \theta < 1$, and $1 \le N \le 100$ was
-    randomly and uniformly chosen. There were 2000 generated cases with these
+    randomly and uniformly chosen. There were 1500 (around 12 hours of computation) generated cases with these
     parameters, and we separated them between stable, when $\hat{\mu} \ge (1 +
     1/\sqrt{2})\hat{\sigma}^2$ and unstable otherwise. We calculated the Bayes
     estimates and the moment estimate for each to obtain a Monte Carlo loss
-    estimation. The results can be found in table XXX. Several samples had
+    estimation. Several samples had
     convergence problems (less than 1\%), specially in the uninformative case.
     I could not spend more time trying to solve this, because it was already
     too computationally expensive. Few simulations had serious convergence 
-    problems (around 50\%), and were discarded. 
+    problems (around 50\%), and were discarded. I also observe that more time
+    calibrating the priors is very important, and it caused serial problems.
+    The results can be found in table \ref{tab:losses}. The uninformative is
+    the best estimator in this case. This is caused because the others
+    estimate down the $N$ value. The geometric and correlated case was the
+    opposite, and it may be caused by the prior strong correlation. The moment
+    estimator appeared to be very unstable. I conclude one need to specify
+    improved hyperparameters for the priors. All the codes can be found in the
+    Jupyter notebook at Github repository \cite{github}.
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Estimates}             & \textbf{Stable cases} & \textbf{Unstable cases} \\ \hline
+    \textbf{Raftery}               & 329.65                & 1071.89                 \\ \hline
+    \textbf{Uninformative}         & 297.37                & 953.31                  \\ \hline
+    \textbf{Geometric independent} & 305.31                & 1050.04                 \\ \hline
+    \textbf{Geometric correlated}  & 580.64                & 979.06                  \\ \hline
+    \textbf{Moment}                & 336.27                &  $>1e10$       \\ \hline
+    \end{tabular}
+    \caption{Mean quadratic loss estimated by Monte Carlo for each estimator.}
+    \label{tab:losses}
+\end{table}
