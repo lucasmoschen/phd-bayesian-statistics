@@ -3,15 +3,16 @@
     {\bf Solution.} I use {\em Stan} platform with {\em PyStan} interface for
     {\em Python programming language}. The problem is that it does not handle
     unbounded discrete parameters. Therefore we use the approach suggested in
-    the documentation \cite{stan} considering the population size a continuous
+    the documentation \cite[]{stan} considering the population size a continuous
     variable. I tried to use the package {\em PyMC3} for this model (this
     package handles discrete parameters), but given convergence problems,
     I do not present the results. 
     
-    \ind As I will present posteriorly, this problem
-    may be related to the sampler Metropolis. For the Geometric and
+    \ind As I will present later, this problem
+    may be related to the Metropolis sampler. For the Geometric and
     independent approach, it is possible to compare the analytic curve with
-    Stan result (considering $N$ a real variable), and Stan got a well
+    the 
+    Stan result (considering $N$ a real variable), and Stan got a good
     approximate result, while PyMC3 had convergence problems. I used 50
     thousand iterations with 5 chains. The parameter adapt delta varied
     between 0.95 and 0.99. 
@@ -22,7 +23,7 @@
 
     \vspace{2ex}
 
-    \ind In table \ref{tab:hyperparameters-models}, I presented the hyperparameters
+    \ind In table \ref{tab:hyperparameters-models}, I present the hyperparameters
     chosen for the models. For the Raftery approach, we chose a
     uniform distribution on $\theta$ (given we have no information about the
     populations), and we define the Gamma parameters to have mean and variance
@@ -46,7 +47,7 @@
     \ind In Figures \ref{fig:marginal-posteriors}, I sketch the marginal posterior
     distributions for each approach. In table \ref{tab:summary-statistics-posterior-impala}, it is
     shown the Bayes estimator under quadratic loss (the expected value
-    \cite[Section 4]{Robert2007}), under loss \ref{eq:relative_loss} (MRSE),
+    \cite[Section 4]{Robert2007}), under loss \eqref{eq:relative_loss} (MRSE),
     the median point estimate, and 95\%
     highest density interval (HDI).We observe that the shape of
     the posterior distributions are quite similar, with fast grow between
