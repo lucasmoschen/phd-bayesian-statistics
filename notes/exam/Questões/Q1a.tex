@@ -7,22 +7,23 @@
     Each time we roll the ball $O$, there is a uniform probability of
     stopping between $0$ and $L = 1$. Then, 
     $$\Pr(\text{position of } O < \text{position of } W) = \Pr(\text{position of } O < p) = p$$
-    and each trial has a probability $p$ of success and $1-p$ of fail. Moreover,
-    we do $n$ experiments conditionally independents, what implies that the
-    data-generating mechanism is a Binomial distribution with parameters $n$ and $p$, that is,
+    and each trial has a probability $p$ of success and $1-p$ of fail. Therefore,
+    doing $n$ conditionally independent experiments with probability of
+    success $p$, the data-generating mechanism is a Binomial
+    distribution with parameters $n$ and $p$, that is,
     $X \sim Bin(n,p)$. 
 
-    The density of $X$ is given by the expression 
+    The density of the distribution of $X$ with respect to the counting measure is given by the expression 
     $$
     f(x|n,p) = \binom{n}{x} p^x(1 - p)^{n-x}.
     $$
     We'll drop the conditionality of $n$ and suppose it's fixed. Then, the
     likelihood is 
     $$
-    L(p|x) =  \genfrac(){0pt}{0}{n}{x} p^x(1 - p)^{n-x}
+    L(p|x) =  \genfrac(){0pt}{0}{n}{x} p^x(1 - p)^{n-x}.
     $$
 
-    with respect to the counting measure. We defined the essential elements
+    We defined the essential elements
     for a simple statistical inference. Now we must define the crucial elements of a Bayesian analysis: 
 
     \begin{enumerate}
@@ -37,5 +38,5 @@
 
     The dominating measure in $\Theta$ is the Lebesgue measure and the
     dominating measure in $\mathcal{X}$ (which defines the likelihood
-    function \cite{schervish1996theory}) is the counting measure. 
+    function \cite[]{schervish1996theory}) is the counting measure. 
 \end{proof}

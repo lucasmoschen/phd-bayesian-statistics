@@ -1,5 +1,5 @@
 \begin{proposition}
-    \label{prop:joint_bayes}
+    \label{prop:joint_bayes-1}
     The joint distribution of $p$ and $X$ is given by
     \begin{equation*}
      \pr(a < p < b, X = x) = \int_{a}^{b} \binom{n}{x} t^x(1-t)^{n-x}\,dt.
@@ -32,7 +32,7 @@
     $$
     F_{p|X}(b|x) = \frac{\pr(p \le b, X = x)}{\pr(X = x)}, \text{ whenever } \pr(X = x) > 0.
     $$
-    By Proposition \ref{prop:joint_bayes}, we can calculate in the following
+    By Proposition \ref{prop:joint_bayes-1}, we can calculate in the following
     manner:
     $$
     F_{p|X}(b|x) = \frac{\int_{0}^{b} \binom{n}{x} t^x(1-t)^{n-x}\,dt}{\int_{0}^{1} \binom{n}{x} t^x(1-t)^{n-x}\,dt} = \frac{\int_{0}^{b} t^x(1-t)^{n-x}\,dt}{\int_{0}^{1} t^x(1-t)^{n-x}\,dt}
@@ -40,12 +40,12 @@
     given that $\pr(X = x) = \pr(p \in [0,1], X = x)$. The posterior measure
     $\mu_{p|X}$ can be defined through $F_{p|X}(b|x)$. The expressions in the
     integrals do not have closed form and the ratio can be expressed as a
-    ratio of incomplete beta functions \cite{beta}: 
+    ratio of incomplete beta functions \cite[]{beta}: 
     $$F_{p|X}(b|x) = \frac{B(b; x+1, n-x+1)}{B(1; x+1, n-x+1)}.$$
-    In special, $B(1;x+1,n-x+1) = B(x+1,n-x+1)$ is the beta function. 
+    In particular, $B(1;x+1,n-x+1) = B(x+1,n-x+1)$ is the beta function. 
 
     The density of the posterior measure can be calculated using the
-    Fundamental Theorem of Calculus \cite{calculus}
+    Fundamental Theorem of Calculus \cite[]{calculus}
     \begin{equation}
         \label{eq:posterior-1b}
         \xi(p|x) = \frac{d}{dp}F_{p|X}(p|x) = \frac{1}{B(x+1,n-x+1)}p^x(1 - p)^{n-x}.

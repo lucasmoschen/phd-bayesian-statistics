@@ -55,15 +55,16 @@
         \xi(p|x)\, dp.$$ 
         
         Function $G$ is defined in the decision space $[0,1]$ and it is
-        continuos. By Weierstrass' theorem \cite{weierstrass}, $G$ has a global maximum. It can
+        continuos. By Weierstrass' theorem \cite[]{weierstrass}, $G$ has a global maximum. It can
         not be on the limits, because $G(0) < G(\epsilon)$ and $G(1) < G(1 - \epsilon)$
-        for every $\epsilon > 0$. If $\bar{d}_{\epsilon} \in (0,1)$ is global maximum, 
+        for every $\epsilon > 0$. If $\bar{d}_{\epsilon} \in (0,1)$ is global
+        maximum of $G$, 
         $$
-        G'(d) = \xi(\bar{d}_{\epsilon}+\epsilon|x) - \xi(\bar{d}_{\epsilon}-\epsilon|x) = 0.
+        G'(\bar{d}_{\epsilon} ) = \xi(\bar{d}_{\epsilon}+\epsilon|x) - \xi(\bar{d}_{\epsilon}-\epsilon|x) = 0.
         $$
         Then $\xi(\bar{d}_{\epsilon} + \epsilon) = \xi(\bar{d}_{\epsilon} - \epsilon) \implies
         \log(\xi(\bar{d}_{\epsilon} + \epsilon)) = \log(\xi(\bar{d}_{\epsilon} - \epsilon))$. By
-        Rolle's theorem \cite{rolle}, there exists $d^{*}_{\epsilon} \in
+        Rolle's theorem \cite[]{rolle}, there exists $d^{*}_{\epsilon} \in
         (\bar{d}_{\epsilon} - \epsilon, \bar{d}_{\epsilon} + \epsilon)$ such
         that 
         $$

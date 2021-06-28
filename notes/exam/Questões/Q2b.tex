@@ -5,7 +5,7 @@
     $$
     r(\pi, \delta_S) = \int_{\Theta}\int_{\mathcal{X}} L(\theta, \delta_S(x)) f(x|\theta) \,dx \pi(\theta) \, d\theta 
     $$
-    Applying to the quadratic loss,
+    Applying the quadratic loss,
     \begin{equation*}
         \begin{split}
             r(\pi, \delta_S) &= \int_{\Theta}\int_{\mathcal{X}} (\delta_S(x) - \theta)^2 f(x|\theta)\pi(\theta) \, dx \, d\theta \\
@@ -31,6 +31,6 @@
     $$
     (\theta - \delta_S(x))^2f(x|\theta)\pi(\theta) = 0
     $$
-    almost surely over $\Theta \times \mathcal{X}$, what is an absurd. 
+    almost surely over $\Theta \times \mathcal{X}$, which is an absurd. 
 
 \end{proof}

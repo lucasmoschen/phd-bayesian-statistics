@@ -29,10 +29,14 @@
         $$\var^{\xi}[p] = \frac{(x+1)(n-x+1)}{(n+2)^2(n+3)} \le
         \frac{1}{4}\frac{(n+2)^2}{(n+2)^2(n+3)} = \frac{1}{4(n+3)}.$$
 
-        \item[(ii)] We calculate the integrated risk 
+        \item[(ii)] Before calculating it, observe that 
+        $$
+        m(x) = \int_0^1 \binom{n}{x}p^x(1-p)^{n-x} \, dp = \binom{n}{x}B(x+1,n-x+1) = \frac{1}{n+1}.
+        $$
+        Then, we calculate the integrated risk 
         
         $$
-        r(\pi, \delta_1) = \sum_{x=0}^n \varrho(\pi, \delta_1|x)= \sum_{x=0}^n 1 = n + 1
+        r(\pi, \delta_1) = \sum_{x=0}^n \varrho(\pi, \delta_1|x)m(x)= \sum_{x=0}^n \frac{1}{n+1} = 1
         $$
         and
         $$
