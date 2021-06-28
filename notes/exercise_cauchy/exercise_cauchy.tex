@@ -106,17 +106,17 @@ measure is
     We shall prove this function has an global maximum. To do this, we will
     first prove that $-l(\theta|\bx)$ is a coercive function, that is, for each
     sequence $\{\theta_n\}_{n\in\mathbb{N}}$, such that $|\theta_n| \to +
-    \infty$, we have that $-l(\theta|\bx) \to \infty$. By triangular
+    \infty$, we have that $-l(\theta|\bx) \to \infty$. By the triangular
     inequality, for $i=1,...,n$,
     $$|x_i - \theta| \ge |\theta| - |x_i| \implies 1 + |x_i - \theta|^2 \ge
     1 + (|\theta| - |x_i|)^2 \implies \log(1 + |x_i - \theta|^2) \ge
     \log(1 + (|\theta| - |x_i|)^2)$$
     if $|\theta| > |x_i|$.  Therefore, if $|\theta_n| \to + \infty$, taking
-    $n$ largely enough, by the relation above, 
+    $n$ large enough, by the relation above, 
     $$
     \log(1 + |x_i - \theta|^2) \to + \infty,
     $$
-    what proves that $-l(\theta|\bx)$ is coercive. Given that it is continuos,
+    which proves that $-l(\theta|\bx)$ is coercive. Given that it is continuous,
     we know there is a global minimum $\bar{\theta}$ \cite[Corolary
     1.2.8]{otimizacao}, and $l(\theta|\bx)$ has a global maximum. 
     In order to find the maximum likelihood estimator (MLE) $\hat{\theta}(\bx)$, we find the
@@ -136,14 +136,14 @@ measure is
         \item if $\theta =
         \max\{x_i\}_{i=1}^{n}, x_i - \theta \le 0$ and $l'(\theta|\bx) \le 0$.
     \end{itemize} 
-    what implies the existence of $\theta^* \in I$ such that $l'(\theta^*|\bx)
-    = 0$, by the Intermediate Value Theorem \cite[Theorem 12, Page 184]{Lages1976}. We use the Brent’s method \cite{brent} to solve the problem and its
-    implementation in SciPy \cite{2020SciPy-NMeth}. The codes are available at
-    Github\footnote{\url{https://github.com/lucasmoschen/phd-bayesian-statistics}}\cite{github}. When $n=10$ and the data is \ref{eq:data}, teh solution is
+    which implies the existence of $\theta^* \in I$ such that $l'(\theta^*|\bx)
+    = 0$, by the Intermediate Value Theorem \cite[Theorem 12, Page 184]{Lages1976}. We use the Brent’s method \cite[]{brent} to solve the problem and its
+    implementation in SciPy \cite[]{2020SciPy-NMeth}. The code is available at
+    Github\footnote{\url{https://github.com/lucasmoschen/phd-bayesian-statistics}}\cite[]{github}. When $n=10$ and the data is \ref{eq:data}, teh solution is
     $$
     \hat{\theta}(\bx) \approx 4.531
     $$
-    and the function can is drawn in Figure \ref{fig:log-likelihood-cauchy}
+    and the function is drawn in Figure \ref{fig:log-likelihood-cauchy}
     \begin{figure}[!hb]
         \centering
         \includegraphics[width=0.8\textwidth]{../../images/log-likelihood.png}
@@ -238,12 +238,12 @@ The first four points are straightforward:
     \item[2.] Since $\Omega$ is an open set, its interior is itself.
     Therefore, $\theta \in \Omega = \text{int } \Omega$.   
     \item[3.] We will elicit the priors in the next section, with support
-    on $\Omega$ and continuos everywhere.
+    on $\Omega$ and continuous everywhere.
     \item[4.] The log-likelihood, equation \ref{eq:loglikelihood-cauchy}, 
     is infinitely differentiable in $\R$ because it is a composition of
     infinitely differentiable functions and it is defined everywhere. The
     second derivative is explicit in equation
-    \ref{eq:dderivarive-log-cauchy} and it is clearly continuos. 
+    \ref{eq:dderivarive-log-cauchy} and it is clearly continuous. 
 \end{enumerate}
 
 Although in this example the MLE is unique and the unique local maximum, this
@@ -273,7 +273,7 @@ $$l''(\theta_m|X_1, X_2) = \frac{1}{2}\frac{(X_1 - X_2)^2 - 4}{((X_1 -
 \theta_m)^2 + 1)^2} + \frac{1}{2}\frac{(X_1 - X_2)^2 - 4}{((X_2 -
 \theta_m)^2 + 1)^2} > 0
 $$
-what implies we have a local minimum here. By the expression's symmetry \ref{eq:loglikelihood-cauchy}, we conclude that we have two possible values for the MLE with positive probability. According to \cite{young_smith_2005}, this problem appears with positive probability when $n$ tends to infinity. This problem complicates the demonstration of consistency of the MLE, but \cite{consistency-mle} proves that $\hat{\theta}(\bx)$ converges to the true value $\theta_0$ exponentially. By the continuity $l''(\cdot|x)$, the consistency of the MLE and the Continuos mapping theorem, we know that 
+which implies we have a local minimum here. By the expression's symmetry \ref{eq:loglikelihood-cauchy}, we conclude that we have two possible values for the MLE with positive probability. According to \cite[]{young_smith_2005}, this problem appears with positive probability when $n$ tends to infinity. This problem complicates the demonstration of consistency of the MLE, despite that $\hat{\theta}(\bx)$ converges to the true value $\theta_0$ exponentially \cite[Page 139]{consistency-mle}. By the of continuity $l''(\cdot|x)$, the consistency of the MLE and the Continuous mapping theorem, we know that 
 $$
 l''(\hat{\theta}(\bx)|\bx) \overset{p}{\to} l''(\theta|\bx). 
 $$
@@ -297,7 +297,7 @@ and the posterior density of $\Psi_n = \Sigma_n^{-1/2}(\theta - \hat{\theta}(\bx
 $$
 \frac{\theta - \hat{\theta}(\bx)}{\Sigma_n^{1/2}} \sim \mathcal{N}(0,1)
 $$
-what implies that the parameters of the normal approximation are 
+which implies that the parameters of the normal approximation are 
 \begin{equation}
     \label{eq:mu-normal-approximation}
     \mu = \hat{\theta}(\bx) \approx 4.531
@@ -344,7 +344,7 @@ and
 $$
 \int_{\Omega} \prod_{i=1}^n \frac{1}{1 + (x_i - \theta)^2} \, d\theta \le \int_{\Omega} \frac{1}{1 + (x_1 - \theta)^2} \, d\theta = \pi,
 $$
-what proves the posteriori is proper almost surely, even though its expression
+which proves the posteriori is proper almost surely, even though its expression
 is really difficult. 
 
 \subsection*{Informative prior}
@@ -392,10 +392,10 @@ with the same interpretation as the Normal distribution. Figure
 
 Considering the data given and the priors elicited previously, we can
 obtain the posterior distribution through a MCMC routine. In this case, we use
-PyMC3 library (\cite{pymc3}) in the Python language. We sampled from this
+PyMC3 library \cite[]{pymc3} in the Python language. We sampled from this
 procedure 5000 draws and 1000 tune iterations. After simulating with each prior,
 we get $\pr(\theta \ge 5 | X = \bx)$ and compare with the one given by
-\cite{schervish1996theory}. The results are in the Table \ref{tb:table-prob}.
+\cite[]{schervish1996theory}. The results are in the Table \ref{tb:table-prob}.
 We can see that the most similar occurs when the prior is the lebesgue measure
 in the real line and, for that reason, we can reproduce a similar figure. 
 
@@ -479,7 +479,7 @@ the Normal distribution are calculated using the principles highted in MLE and
 normal approximation sections. They can be visualized in Table
 \ref{tb:approximation-normal-sizes}. We see that there is a consistency in the
 MLE observed because it seems to converge to 5, what is a good news. The scale
-parameter is vanishing apparently. 
+parameter is vanishing. 
 
 \begin{table}[ht]
     \centering
